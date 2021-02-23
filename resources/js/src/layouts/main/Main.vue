@@ -19,7 +19,7 @@
     >
         <v-nav-menu
             :navMenuItems="navMenuItems"
-            title="ART RRFF"
+            title="CLART RRFF"
             parent=".layout--main"
         />
 

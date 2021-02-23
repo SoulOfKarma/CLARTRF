@@ -31,8 +31,8 @@
                                 <div class="vx-card__title mb-4">
                                     <h4 class="mb-4">Inicio de Sesion</h4>
                                     <p>
-                                        Bienvenido al sistema de Acta de
-                                        Recepciones de RRFF
+                                        Check List de Acta de Recepciones de
+                                        RRFF
                                     </p>
                                 </div>
 

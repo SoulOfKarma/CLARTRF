@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Ejecutores extends Model
+class RepositorioDocumentaciones extends Model
 {
     protected $fillable = [
-        'descripcionEjecutores'
+        'idCLART', 'nombreDocumento' 
     ];
 }

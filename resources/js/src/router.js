@@ -37,17 +37,47 @@ const router = new Router({
                 {
                     path: "/Home",
                     name: "Home",
-                    component: () => import("./views/ART/Home.vue")
+                    component: () => import("./views/CLART/Home.vue")
                 },
                 {
-                    path: "/NuevoART",
-                    name: "NuevoART",
-                    component: () => import("./views/ART/NuevoART.vue")
+                    path: "/NuevoCLARTEQ",
+                    name: "NuevoCLARTEQ",
+                    component: () => import("./views/CLART/NuevoCLARTEQ.vue")
                 },
                 {
-                    path: "/ListadoART",
-                    name: "ListadoART",
-                    component: () => import("./views/ART/ListadoART.vue")
+                    path: "/NuevoCLARTAP",
+                    name: "NuevoCLARTAP",
+                    component: () => import("./views/CLART/NuevoCLARTAP.vue")
+                },
+                {
+                    path: "/NuevoCLARTI",
+                    name: "NuevoCLARTI",
+                    component: () => import("./views/CLART/NuevoCLARTI.vue")
+                },
+                {
+                    path: "/NuevoCLARTMI",
+                    name: "NuevoCLARTMI",
+                    component: () => import("./views/CLART/NuevoCLARTMI.vue")
+                },
+                {
+                    path: "/ListadoCLARTAP",
+                    name: "ListadoCLARTAP",
+                    component: () => import("./views/CLART/ListadoCLARTAP.vue")
+                },
+                {
+                    path: "/ListadoCLARTEQ",
+                    name: "ListadoCLARTEQ",
+                    component: () => import("./views/CLART/ListadoCLARTEQ.vue")
+                },
+                {
+                    path: "/ListadoCLARTI",
+                    name: "ListadoCLARTI",
+                    component: () => import("./views/CLART/ListadoCLARTI.vue")
+                },
+                {
+                    path: "/ListadoCLARTMI",
+                    name: "ListadoCLARTMI",
+                    component: () => import("./views/CLART/ListadoCLARTMI.vue")
                 }
             ]
         },

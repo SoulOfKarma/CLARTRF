@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateEjecutoresTable extends Migration
+class CreateRepositorioDocumentacionesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class CreateEjecutoresTable extends Migration
      */
     public function up()
     {
-        Schema::create('ejecutores', function (Blueprint $table) {
+        Schema::create('repositorio_documentaciones', function (Blueprint $table) {
             $table->id();
-            $table->string('descripcionEjecutores');
+            $table->bigInteger('idCLART');
+            $table->string('nombreDocumento');
             $table->timestamps();
         });
     }
@@ -27,6 +28,6 @@ class CreateEjecutoresTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ejecutores');
+        Schema::dropIfExists('repositorio_documentaciones');
     }
 }

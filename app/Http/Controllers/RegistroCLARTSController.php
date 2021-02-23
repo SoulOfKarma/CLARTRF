@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Cdps;
+use App\RegistroCLARTS;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
-class CdpsController extends Controller
+class RegistroCLARTSController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,12 +16,12 @@ class CdpsController extends Controller
     public function index()
     {
         try {
-            $get_all = Cdps::all();
+            $get_all = registroCLARTS::all();
             return $get_all;
         } catch (\Throwable $th) {
-            return $th;
+            log::info($th);
+            return false;
         }
-        
     }
 
     /**
@@ -31,17 +31,7 @@ class CdpsController extends Controller
      */
     public function create()
     {
-        //
-    }
-
-    public function CreateCDP(Request $request){
-      try {
-          Cdps::create($request->all());
-          return true;
-      } catch (\Throwable $th) {
-          log::info($th);
-          return false;
-      }
+        
     }
 
     /**
@@ -52,16 +42,22 @@ class CdpsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            registroCLARTS::create($request->all());
+            return true;
+        } catch (\Throwable $th) {
+            log::info($th);
+            return false;
+        }
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Cdps  $cdps
+     * @param  \App\RegistroCLARTS  $registroCLARTS
      * @return \Illuminate\Http\Response
      */
-    public function show(Cdps $cdps)
+    public function show(RegistroCLARTS $registroCLARTS)
     {
         //
     }
@@ -69,10 +65,10 @@ class CdpsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Cdps  $cdps
+     * @param  \App\RegistroCLARTS  $registroCLARTS
      * @return \Illuminate\Http\Response
      */
-    public function edit(Cdps $cdps)
+    public function edit(RegistroCLARTS $registroCLARTS)
     {
         //
     }
@@ -81,10 +77,10 @@ class CdpsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Cdps  $cdps
+     * @param  \App\RegistroCLARTS  $registroCLARTS
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Cdps $cdps)
+    public function update(Request $request, RegistroCLARTS $registroCLARTS)
     {
         //
     }
@@ -92,10 +88,10 @@ class CdpsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Cdps  $cdps
+     * @param  \App\RegistroCLARTS  $registroCLARTS
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Cdps $cdps)
+    public function destroy(RegistroCLARTS $registroCLARTS)
     {
         //
     }

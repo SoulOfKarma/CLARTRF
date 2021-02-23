@@ -15,8 +15,13 @@ class ProveedoresController extends Controller
      */
     public function index()
     {
-        $get_all = Proveedores::all();
-        return $get_all;
+        try {
+            $get_all = Proveedores::all();
+            return $get_all;
+        } catch (\Throwable $th) {
+            log::info($th);
+            return false;
+        }
     }
 
     /**
@@ -24,17 +29,14 @@ class ProveedoresController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
-    }
-
-    public function CreateProveedor(Request $request){
         try {
             Proveedores::create($request->all());
             return true;
         } catch (\Throwable $th) {
             log::info($th);
+            return false;
         }
     }
 
