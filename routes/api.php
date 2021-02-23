@@ -28,6 +28,7 @@ Route::group(['middleware' => ['jwt.verify']], function() {
 
     
     //Posts 
+    Route::post('/CLART/PostDocumentoF', ['middleware' => 'cors', 'uses' => 'RepositorioDocumentacionesController@store']);
     Route::post('/CLART/PostRegistroCLART', ['middleware' => 'cors', 'uses' => 'RegistroCLARTSController@store']);
 
 });

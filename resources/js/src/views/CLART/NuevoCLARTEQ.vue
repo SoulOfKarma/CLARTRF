@@ -6,7 +6,11 @@
                     <div class="vx-col w-1/2 mt-5">
                         <h6>ID Art:</h6>
                         <br />
-                        <vs-input class="inputx w-full"></vs-input>
+                        <vs-input
+                            class="inputx w-full"
+                            v-model="idART"
+                            @keypress="isNumber($event)"
+                        ></vs-input>
                     </div>
                     <div class="vx-col w-1/2 mt-5">
                         <h6>Proveedor:</h6>
@@ -14,18 +18,39 @@
                         <v-select
                             class="w-full select-large"
                             taggable
-                            label="descripcionOrdenCompras"
+                            label="rutProveedor"
+                            v-model="seleccionProveedor"
+                            :options="listadoProveedores"
                         ></v-select>
+                    </div>
+                    <div class="vx-col w-full mt-5">
+                        <h6>Descripcion Proveedor:</h6>
+                        <br />
+                        <vs-input
+                            class="inputx w-full"
+                            readonly
+                            v-model="seleccionProveedor.descripcionProveedor"
+                        ></vs-input>
                     </div>
                     <div class="vx-col w-1/2 mt-5">
                         <h6>Monto:</h6>
                         <br />
-                        <vs-input class="inputx w-full"></vs-input>
+                        <vs-input
+                            class="inputx w-full"
+                            v-model="monto"
+                            @blur="convertirMonto"
+                            @focus="retornarMonto"
+                            @keypress="isNumber($event)"
+                        ></vs-input>
                     </div>
                     <div class="vx-col w-1/2 mt-5">
                         <h6>N° Factura:</h6>
                         <br />
-                        <vs-input class="inputx w-full"></vs-input>
+                        <vs-input
+                            class="inputx w-full"
+                            v-model="nfactura"
+                            @keypress="isNumber($event)"
+                        ></vs-input>
                     </div>
                     <div class="vx-col w-1/2 mt-5">
                         <h6>Fecha Emision Factura</h6>
@@ -243,10 +268,21 @@ export default {
                 enableSeconds: true,
                 noCalendar: false
             },
+            seleccionProveedor: {
+                id: 0,
+                rutProveedor: "",
+                descripcionProveedor: ""
+            },
             fechaEmisionContabilidad: new Date(),
             fechaFactura: new Date(),
             image: "",
-            value3: ""
+            value3: "",
+            idART: "",
+            monto: 0,
+            montof: 0,
+            nfactura: 0,
+            listadoProveedores: [],
+            localVal: process.env.MIX_APP_URL
         };
     },
     methods: {
@@ -281,15 +317,15 @@ export default {
                     minimumFractionDigits: 0
                 });
 
-                this.montoData = this.montoART;
-                this.montoART = formatter.format(this.montoData);
+                this.montof = this.monto;
+                this.monto = formatter.format(this.montof);
             } catch (error) {
                 console.log(error);
             }
         },
         retornarMonto() {
             try {
-                this.montoART = this.montoData;
+                this.monto = this.montof;
             } catch (error) {
                 console.log(error);
             }
@@ -301,40 +337,99 @@ export default {
             this.image = event.target.files[0];
         },
         guardarCLART() {
-            //Creamos el formData
-            var data = new FormData();
-            //Añadimos la imagen seleccionada
-            data.append("avatar", this.image);
-            data.append("id", this.value3);
-            /* axios
-                .post(this.localVal + "/api/Agente/PostDocumentoF", data, {
-                    headers: {
-                        Authorization:
-                            `Bearer ` + sessionStorage.getItem("token")
-                    }
-                })
-                .then(response => {
-                    if (response.data) {
-                        this.$vs.notify({
-                            title: "Documento Guardado ",
-                            text:
-                                "Podra Visualizarlo en el menu del costado para descargarlo o visualizarlo en el navegador ",
-                            color: "success",
-                            position: "top-right"
-                        });
-                        this.popupActive3 = false;
-                    } else {
-                        this.$vs.notify({
-                            title: "Error al subir el documento ",
-                            text:
-                                "Intente nuevamente con el formato PDF o alguna Imagen ",
-                            color: "danger",
-                            position: "top-right"
-                        });
-                    }
-                }); */
-        }
+            try {
+                //Creamos el formData
+                var data = new FormData();
+                //Añadimos la imagen seleccionada
+                data.append("avatar", this.image);
+                data.append("id", this.idART);
+
+                //Data en objeto para Registro
+                let objeto = {
+                    idART: this.idART,
+                    idProveedor: this.seleccionProveedor.id,
+                    monto: this.montof,
+                    nfactura: this.nfactura,
+                    fechaemifac: this.fechaFactura,
+                    fechaentcont: this.fechaEmisionContabilidad,
+                    idCategoria: 1
+                };
+
+                const dat = objeto;
+
+                axios
+                    .all([
+                        axios.post(
+                            this.localVal + "/api/CLART/PostDocumentoF",
+                            data,
+                            {
+                                headers: {
+                                    Authorization:
+                                        `Bearer ` +
+                                        sessionStorage.getItem("token")
+                                }
+                            }
+                        ),
+                        axios.post(
+                            this.localVal + "/api/CLART/PostRegistroCLART",
+                            dat,
+                            {
+                                headers: {
+                                    Authorization:
+                                        `Bearer ` +
+                                        sessionStorage.getItem("token")
+                                }
+                            }
+                        )
+                    ])
+                    .then(
+                        axios.spread((res1, res2) => {
+                            let resp1 = res1.data;
+                            let resp2 = res2.data;
+
+                            if (resp1 == true && resp2 == true) {
+                                this.$vs.notify({
+                                    title: "Registro Guardado ",
+                                    text:
+                                        "Podra Visualizarlo en el menu del costado para descargarlo o visualizarlo en el navegador ",
+                                    color: "success",
+                                    position: "top-right"
+                                });
+                                this.popupActive3 = false;
+                            } else {
+                                this.$vs.notify({
+                                    title: "Error al guardar registro ",
+                                    text: "Intente nuevamente ",
+                                    color: "danger",
+                                    position: "top-right"
+                                });
+                            }
+                        })
+                    );
+            } catch (error) {
+                console.log(error);
+            }
+        },
         //Fin Subir Documentos
+        cargarProveedores() {
+            try {
+                axios
+                    .get(this.localVal + "/api/CLART/GetProveedores", {
+                        headers: {
+                            Authorization:
+                                `Bearer ` + sessionStorage.getItem("token")
+                        }
+                    })
+                    .then(res => {
+                        this.listadoProveedores = res.data;
+                    });
+            } catch (error) {
+                console.log(error);
+            }
+        }
+    },
+    created: function() {
+        this.cargarProveedores();
     }
 };
 </script>
