@@ -370,7 +370,20 @@ export default {
                         }
                     })
                     .then(res => {
-                        this.listadoCLART = res.data;
+                        let list = res.data;
+                        const formatter = new Intl.NumberFormat("en-US", {
+                            style: "currency",
+                            currency: "USD",
+                            minimumFractionDigits: 0
+                        });
+                        let b = [];
+
+                        list.forEach((value, index) => {
+                            value.monto = formatter.format(value.monto);
+                            b.push(value);
+                        });
+
+                        this.listadoCLART = b;
                     });
             } catch (error) {
                 console.log(error);
