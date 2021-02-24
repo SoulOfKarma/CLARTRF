@@ -24,6 +24,20 @@ class RegistroCLARTSController extends Controller
         }
     }
 
+    public function showRegistroEspecifico(){
+        try {
+            $get_all = registroCLARTS::select("registroCLARTS.id","registroCLARTS.idART","proveedores.rutProveedor",
+            "proveedores.descripcionProveedor","registroCLARTS.monto","registroCLARTS.nfactura","registroCLARTS.fechaemifac",
+            "registroCLARTS.fechaentcont")
+            ->join("proveedores","registroCLARTS.idProveedor","=","proveedores.id")
+            ->get();
+            return $get_all;
+        } catch (\Throwable $th) {
+            log::info($th);
+            return false;
+        }
+    }
+
     /**
      * Show the form for creating a new resource.
      *

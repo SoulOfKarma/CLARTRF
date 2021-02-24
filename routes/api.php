@@ -25,7 +25,8 @@ Route::post('/auth/login','LoginController@login');
 Route::group(['middleware' => ['jwt.verify']], function() {
     //Gets
     Route::get('/CLART/GetProveedores', ['middleware' => 'cors', 'uses' => 'ProveedoresController@index']);
-
+    Route::get('/CLART/GetRegistroCLARTS', ['middleware' => 'cors', 'uses' => 'RegistroCLARTSController@showRegistroEspecifico']);
+    Route::get('/CLART/GetRegistroDocumentosF/{id}', ['middleware' => 'cors', 'uses' => 'RepositorioDocumentacionesController@showRegistroEspecifico']);
     
     //Posts 
     Route::post('/CLART/PostDocumentoF', ['middleware' => 'cors', 'uses' => 'RepositorioDocumentacionesController@store']);

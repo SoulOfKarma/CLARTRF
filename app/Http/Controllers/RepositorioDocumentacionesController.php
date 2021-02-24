@@ -24,6 +24,18 @@ class RepositorioDocumentacionesController extends Controller
         }
     }
 
+    public function showRegistroEspecifico($id){
+        try {
+            $get_all = RepositorioDocumentaciones::select("*")
+            ->where("repositorio_documentaciones.idCLART", $id)
+            ->get();
+            return $get_all;
+        } catch (\Throwable $th) {
+            log::info($th);
+            return false;
+        }
+    }
+
     /**
      * Show the form for creating a new resource.
      *
