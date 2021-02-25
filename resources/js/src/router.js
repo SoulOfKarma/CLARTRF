@@ -78,6 +78,11 @@ const router = new Router({
                     path: "/ListadoCLARTMI",
                     name: "ListadoCLARTMI",
                     component: () => import("./views/CLART/ListadoCLARTMI.vue")
+                },
+                {
+                    path: "/ListadoCLART",
+                    name: "ListadoCLART",
+                    component: () => import("./views/CLART/ListadoCLART.vue")
                 }
             ]
         },

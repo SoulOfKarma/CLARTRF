@@ -93,5 +93,11 @@ export default [
                 icon: "HomeIcon"
             }
         ]
+    },
+    {
+        url: "/ListadoCLART",
+        name: "Listado Total ART",
+        slug: "ListadoCLART",
+        icon: "HomeIcon"
     }
 ];
