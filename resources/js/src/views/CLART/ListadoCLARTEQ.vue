@@ -363,7 +363,7 @@ export default {
         cargarCLART() {
             try {
                 axios
-                    .get(this.localVal + "/api/CLART/GetRegistroCLARTS", {
+                    .get(this.localVal + "/api/CLART/GetRegistroCLARTSCatEQ", {
                         headers: {
                             Authorization:
                                 `Bearer ` + sessionStorage.getItem("token")
