@@ -54,20 +54,26 @@ class RepositorioDocumentacionesController extends Controller
      */
     public function store(Request $request)
     {
+        $data = "";
         try {
             if ($request->hasFile('avatar')) {
                 // Si es así , almacenamos en la carpeta public/avatars
                 // esta estará dentro de public/defaults/
-               
                $url = $request->avatar->store('users/Documentacion');
                $RepositorioDocumentaciones = new RepositorioDocumentaciones;
                $RepositorioDocumentaciones->idCLART = $request->id;
+               //$repositorioDocumentaciones->descripcionDocumento = $request->nombreDoc;
                $RepositorioDocumentaciones->nombreDocumento = $url;
                $RepositorioDocumentaciones->save();
+               $idLast = $RepositorioDocumentaciones->id;
+               RepositorioDocumentaciones::where('id', $idLast)
+                ->where('idCLART', $request->id)
+                ->update(['descripcionDocumento' => $request->nombreDoc]);
                return true;
             }
-            return false;
+            
         } catch (\Throwable $th) {
+            log::info($th);
             return false;
         }
     }

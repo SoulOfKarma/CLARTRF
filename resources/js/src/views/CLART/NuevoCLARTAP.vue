@@ -23,7 +23,7 @@
                             :options="listadoProveedores"
                         ></v-select>
                     </div>
-                    <div class="vx-col w-full mt-5">
+                    <div class="vx-col w-1/2 mt-5">
                         <h6>Descripcion Proveedor:</h6>
                         <br />
                         <vs-input
@@ -31,6 +31,17 @@
                             readonly
                             v-model="seleccionProveedor.descripcionProveedor"
                         ></vs-input>
+                    </div>
+                    <div class="vx-col w-1/2 mt-5">
+                        <h6>Estado:</h6>
+                        <br />
+                        <v-select
+                            class="w-full select-large"
+                            taggable
+                            label="descripcionEstado"
+                            v-model="seleccionEstados"
+                            :options="listadoEstados"
+                        ></v-select>
                     </div>
                     <div class="vx-col w-1/2 mt-5">
                         <h6>Monto:</h6>
@@ -273,6 +284,10 @@ export default {
                 rutProveedor: "",
                 descripcionProveedor: ""
             },
+            seleccionEstados: {
+                id: 0,
+                descripcionEstado: ""
+            },
             fechaEmisionContabilidad: new Date(),
             fechaFactura: new Date(),
             image: "",
@@ -282,7 +297,9 @@ export default {
             montof: 0,
             nfactura: 0,
             listadoProveedores: [],
-            localVal: process.env.MIX_APP_URL
+            listadoEstados: [],
+            localVal: process.env.MIX_APP_URL,
+            desDoc: ""
         };
     },
     methods: {
@@ -335,6 +352,7 @@ export default {
         getImage(event) {
             //Asignamos la imagen a  nuestra data
             this.image = event.target.files[0];
+            this.desDoc = this.image.name;
         },
         guardarCLART() {
             try {
@@ -343,6 +361,7 @@ export default {
                 //Añadimos la imagen seleccionada
                 data.append("avatar", this.image);
                 data.append("id", this.idART);
+                data.append("nombreDoc", this.desDoc);
 
                 //Data en objeto para Registro
                 let objeto = {
@@ -352,7 +371,8 @@ export default {
                     nfactura: this.nfactura,
                     fechaemifac: this.fechaFactura,
                     fechaentcont: this.fechaEmisionContabilidad,
-                    idCategoria: 3
+                    idCategoria: 3,
+                    idEstado: this.seleccionEstados.id
                 };
 
                 const dat = objeto;
@@ -411,6 +431,7 @@ export default {
             }
         },
         //Fin Subir Documentos
+        //Carga Listados
         cargarProveedores() {
             try {
                 axios
@@ -426,10 +447,28 @@ export default {
             } catch (error) {
                 console.log(error);
             }
+        },
+        cargarEstados() {
+            try {
+                axios
+                    .get(this.localVal + "/api/CLART/GetEstados", {
+                        headers: {
+                            Authorization:
+                                `Bearer ` + sessionStorage.getItem("token")
+                        }
+                    })
+                    .then(res => {
+                        this.listadoEstados = res.data;
+                    });
+            } catch (error) {
+                console.log(error);
+            }
         }
+        //Fin carga Listados
     },
     created: function() {
         this.cargarProveedores();
+        this.cargarEstados();
     }
 };
 </script>

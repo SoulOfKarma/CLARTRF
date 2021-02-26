@@ -9,6 +9,6 @@ class RegistroCLARTS extends Model
     protected $table = 'registroclarts';
 
     protected $fillable = [
-        'idART', 'idProveedor','monto','nfactura','fechaemifac','fechaentcont','idCategoria'
+        'idART', 'idProveedor','monto','nfactura','fechaemifac','fechaentcont','idCategoria','idEstado'
     ];
 }

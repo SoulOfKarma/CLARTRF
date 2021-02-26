@@ -1,0 +1,268 @@
+-- --------------------------------------------------------
+-- Host:                         localhost
+-- Versión del servidor:         5.7.24 - MySQL Community Server (GPL)
+-- SO del servidor:              Win64
+-- HeidiSQL Versión:             10.2.0.5599
+-- --------------------------------------------------------
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET NAMES utf8 */;
+/*!50503 SET NAMES utf8mb4 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+
+-- Volcando datos para la tabla bodegarrff.documento_asociados: ~0 rows (aproximadamente)
+/*!40000 ALTER TABLE `documento_asociados` DISABLE KEYS */;
+INSERT IGNORE INTO `documento_asociados` (`id`, `descripcion_documento`, `created_at`, `updated_at`) VALUES
+	(1, 'Orden de Compra', '2020-12-17 10:41:59', '2020-12-17 10:41:59'),
+	(2, 'Factura', '2020-12-17 10:42:03', '2020-12-17 10:42:04'),
+	(3, 'Guia de Despacho', '2020-12-17 10:42:10', '2020-12-17 10:42:12');
+/*!40000 ALTER TABLE `documento_asociados` ENABLE KEYS */;
+
+-- Volcando datos para la tabla bodegarrff.material_cantidades_especificas: ~0 rows (aproximadamente)
+/*!40000 ALTER TABLE `material_cantidades_especificas` DISABLE KEYS */;
+INSERT IGNORE INTO `material_cantidades_especificas` (`id`, `descripcion_cantidad_especifica`, `created_at`, `updated_at`) VALUES
+	(1, '400', '2020-12-17 10:45:23', '2020-12-17 10:45:23'),
+	(2, '25', '2020-12-17 10:45:27', '2020-12-17 10:45:27'),
+	(3, 'N/A', '2020-12-17 10:45:35', '2020-12-17 10:45:35'),
+	(4, '20', '2020-12-18 10:49:39', '2020-12-18 10:49:39'),
+	(5, '1', '2020-12-18 11:08:21', '2020-12-18 11:08:21'),
+	(6, '6', '2020-12-18 11:57:53', '2020-12-18 11:57:53'),
+	(7, '2.4', '2020-12-21 11:37:22', '2020-12-21 11:37:22'),
+	(8, '1', '2020-12-21 12:45:21', '2020-12-21 12:45:21'),
+	(9, '3.78', '2020-12-21 15:12:22', '2020-12-21 15:12:22'),
+	(10, '600', '2020-12-22 13:57:47', '2020-12-22 13:57:47');
+/*!40000 ALTER TABLE `material_cantidades_especificas` ENABLE KEYS */;
+
+-- Volcando datos para la tabla bodegarrff.material_ingresados: ~20 rows (aproximadamente)
+/*!40000 ALTER TABLE `material_ingresados` DISABLE KEYS */;
+INSERT IGNORE INTO `material_ingresados` (`id`, `descripcion_material`, `created_at`, `updated_at`) VALUES
+	(1, 'Abrazadera', '2020-12-15 09:12:21', '2020-12-15 09:12:22'),
+	(2, 'Acero Liquido', '2020-12-15 09:12:23', '2020-12-15 09:12:23'),
+	(3, 'Acido', '2020-12-15 09:12:24', '2020-12-15 09:12:24'),
+	(4, 'Adhesivo', '2020-12-15 09:12:24', '2020-12-15 09:12:25'),
+	(5, 'Aditivo Liquido', '2020-12-15 09:12:25', '2020-12-15 09:12:25'),
+	(6, 'Agorex', '2020-12-15 09:12:26', '2020-12-15 09:12:26'),
+	(7, 'Aguarras', '2020-12-15 09:12:26', '2020-12-15 09:12:27'),
+	(8, 'Aire Acondicionado', '2020-12-15 09:12:27', '2020-12-15 09:12:27'),
+	(9, 'Alcohol', '2020-12-15 09:18:15', '2020-12-15 09:18:15'),
+	(10, 'Aldabas', '2020-12-15 09:18:16', '2020-12-15 09:18:16'),
+	(11, 'Amperimetro', '2020-12-15 09:18:16', '2020-12-15 09:18:16'),
+	(12, 'Ampolleta', '2020-12-15 09:18:17', '2020-12-15 09:18:17'),
+	(13, 'Ancladores', '2020-12-15 09:18:18', '2020-12-15 09:18:18'),
+	(14, 'Anticorrosivo', '2020-12-15 09:18:18', '2020-12-15 09:18:18'),
+	(15, 'Arnes', '2020-12-15 09:18:19', '2020-12-15 09:18:19'),
+	(17, 'Aspiradora', '2020-12-15 09:18:19', '2020-12-15 09:18:20'),
+	(19, 'Atornillador', '2020-12-15 09:18:20', '2020-12-15 09:18:20'),
+	(20, 'Automatico', '2020-12-15 09:18:21', '2020-12-15 09:18:21'),
+	(21, 'Adaptador', '2020-12-16 09:31:21', '2020-12-16 09:31:22'),
+	(22, 'Baldosa', '2020-12-15 15:13:46', '2020-12-15 15:13:46'),
+	(23, 'OSB', '2020-12-21 11:36:00', '2020-12-21 11:36:00'),
+	(24, 'Pintura', '2020-12-21 15:10:28', '2020-12-21 15:10:28'),
+	(25, 'Copla', '2020-12-21 15:20:10', '2020-12-21 15:20:10'),
+	(26, 'Cartucho', '2020-12-22 13:57:14', '2020-12-22 13:57:14');
+/*!40000 ALTER TABLE `material_ingresados` ENABLE KEYS */;
+
+-- Volcando datos para la tabla bodegarrff.material_inventarios: ~0 rows (aproximadamente)
+/*!40000 ALTER TABLE `material_inventarios` DISABLE KEYS */;
+INSERT IGNORE INTO `material_inventarios` (`id`, `id_ubicaciones`, `id_servicios`, `id_material_ing`, `id_material_tipo`, `id_cant_esp`, `id_material_medida`, `material_cantidad`, `material_valor`, `material_cantidad_calculada`, `id_documento`, `n_documento`, `created_at`, `updated_at`) VALUES
+	(1, 1, 3, 1, 4, 3, 8, 20, 150, 20.00, 1, '111-5545-MPO2', '2020-12-21 16:26:18', '2020-12-21 16:26:18'),
+	(2, 1, 1, 24, 32, 5, 17, 5, 3990, 18.93, 1, '1154-1221-asd5', '2020-12-21 16:58:52', '2020-12-21 16:58:52'),
+	(3, 1, 3, 26, 35, 10, 11, 2, 2990, 1.20, 1, '5414-dsf5-584a', '2020-12-22 14:01:06', '2020-12-22 14:01:06'),
+	(4, 1, 3, 1, 4, 3, 8, 20, 150, 20.00, 1, '5124-512a-asc2', '2020-12-22 14:15:49', '2020-12-22 14:15:49'),
+	(5, 1, 6, 24, 32, 3, 17, 6, 3990, 22.71, 1, '8459-652-ad25', '2020-12-23 11:54:00', '2020-12-23 11:54:00'),
+	(6, 1, 6, 24, 32, 3, 17, 2, 2990, 7.57, 2, '001-5551245', '2020-12-23 12:23:40', '2020-12-23 12:23:40');
+/*!40000 ALTER TABLE `material_inventarios` ENABLE KEYS */;
+
+-- Volcando datos para la tabla bodegarrff.material_medidas: ~19 rows (aproximadamente)
+/*!40000 ALTER TABLE `material_medidas` DISABLE KEYS */;
+INSERT IGNORE INTO `material_medidas` (`id`, `descripcion_medidas`, `created_at`, `updated_at`) VALUES
+	(1, 'CC', '2020-12-15 12:15:42', '2020-12-15 12:15:42'),
+	(2, 'MM', '2020-12-15 12:15:42', '2020-12-15 12:15:43'),
+	(3, 'PULG', '2020-12-15 12:15:43', '2020-12-15 12:15:43'),
+	(4, 'CM', '2020-12-15 12:15:44', '2020-12-15 12:15:44'),
+	(5, 'KG', '2020-12-15 12:15:44', '2020-12-15 12:15:44'),
+	(6, 'GR', '2020-12-15 12:15:45', '2020-12-15 12:15:45'),
+	(7, 'ROLLO', '2020-12-15 12:15:45', '2020-12-15 12:15:46'),
+	(8, 'UN', '2020-12-15 12:15:46', '2020-12-15 12:15:46'),
+	(9, 'TIRA', '2020-12-15 12:15:47', '2020-12-15 12:15:47'),
+	(10, 'SACO', '2020-12-15 12:15:47', '2020-12-15 12:15:47'),
+	(11, 'ML', '2020-12-15 12:15:48', '2020-12-15 12:15:48'),
+	(12, 'M2', '2020-12-15 12:15:49', '2020-12-15 12:15:49'),
+	(13, 'M3', '2020-12-15 12:15:49', '2020-12-15 12:15:50'),
+	(14, 'LT', '2020-12-15 12:15:50', '2020-12-15 12:15:50'),
+	(15, 'TAMBOR', '2020-12-15 12:15:51', '2020-12-15 12:15:51'),
+	(16, 'BOLSA', '2020-12-15 12:15:51', '2020-12-15 12:15:52'),
+	(17, 'GALON', '2020-12-15 12:15:52', '2020-12-15 12:15:52'),
+	(18, 'CAJA', '2020-12-17 11:47:12', '2020-12-17 11:47:12'),
+	(20, 'PLANCHA', '2020-12-18 12:12:20', '2020-12-18 12:12:20');
+/*!40000 ALTER TABLE `material_medidas` ENABLE KEYS */;
+
+-- Volcando datos para la tabla bodegarrff.material_servicios: ~39 rows (aproximadamente)
+/*!40000 ALTER TABLE `material_servicios` DISABLE KEYS */;
+INSERT IGNORE INTO `material_servicios` (`id`, `descripcion_servicio`, `id_material_ubicacion`, `created_at`, `updated_at`) VALUES
+	(1, 'Carpinteria', 1, '2020-12-14 10:32:54', '2020-12-14 10:32:54'),
+	(2, 'Electricidad', 1, '2020-12-14 10:33:02', '2020-12-14 10:33:03'),
+	(3, 'Gasfiteria', 1, '2020-12-14 10:33:09', '2020-12-14 10:33:09'),
+	(4, 'Mecanica', 1, '2020-12-14 10:33:15', '2020-12-14 10:33:15'),
+	(5, 'Multiservicio', 1, '2020-12-14 10:33:23', '2020-12-14 10:33:23'),
+	(6, 'Pintura', 1, '2020-12-14 10:33:28', '2020-12-14 10:33:28'),
+	(7, 'Proteccion Personal', 1, '2020-12-14 10:33:39', '2020-12-14 10:33:39'),
+	(8, 'Carpinteria', 2, '2020-12-14 10:33:58', '2020-12-14 10:33:59'),
+	(9, 'Electricidad', 2, '2020-12-14 10:34:05', '2020-12-14 10:34:06'),
+	(10, 'Gasfiteria', 2, '2020-12-14 10:34:12', '2020-12-14 10:34:12'),
+	(11, 'Multiservicio', 2, '2020-12-14 10:34:18', '2020-12-14 10:34:18'),
+	(12, 'Carpinteria', 3, '2020-12-14 10:34:35', '2020-12-14 10:34:36'),
+	(13, 'Electricidad', 3, '2020-12-14 10:34:42', '2020-12-14 10:34:43'),
+	(14, 'Gasfiteria', 3, '2020-12-14 10:35:19', '2020-12-14 10:35:19'),
+	(15, 'Mecanica', 3, '2020-12-14 10:35:24', '2020-12-14 10:35:25'),
+	(16, 'Multiservicio', 3, '2020-12-14 10:37:44', '2020-12-14 10:37:44'),
+	(17, 'Pintura', 3, '2020-12-14 10:38:15', '2020-12-14 10:38:15'),
+	(18, 'Carpinteria', 4, '2020-12-14 10:38:52', '2020-12-14 10:39:05'),
+	(19, 'Electricidad', 4, '2020-12-14 10:39:15', '2020-12-14 10:39:15'),
+	(20, 'Gasfiteria', 4, '2020-12-14 10:39:22', '2020-12-14 10:39:23'),
+	(21, 'Oxiginista', 4, '2020-12-14 10:39:38', '2020-12-14 10:39:38'),
+	(22, 'Carpinteria', 5, '2020-12-14 10:39:56', '2020-12-14 10:39:57'),
+	(23, 'Mecanica', 5, '2020-12-14 10:40:10', '2020-12-14 10:40:10'),
+	(24, 'Multiservicio', 5, '2020-12-14 10:40:19', '2020-12-14 10:40:20'),
+	(25, 'Carpinteria', 6, '2020-12-14 10:40:41', '2020-12-14 10:40:41'),
+	(26, 'Gasfiteria', 6, '2020-12-14 10:40:49', '2020-12-14 10:40:49'),
+	(27, 'Mecanica', 6, '2020-12-14 10:40:55', '2020-12-14 10:40:55'),
+	(28, 'Carpinteria', 7, '2020-12-14 10:41:43', '2020-12-14 10:41:43'),
+	(29, 'Gasfiteria', 7, '2020-12-14 10:41:49', '2020-12-14 10:41:50'),
+	(30, 'Carpinteria', 8, '2020-12-14 10:42:04', '2020-12-14 10:42:04'),
+	(31, 'Carpinteria', 9, '2020-12-14 10:42:23', '2020-12-14 10:42:23'),
+	(32, 'Carpinteria', 10, '2020-12-14 10:42:44', '2020-12-14 10:42:44'),
+	(33, 'Carpinteria', 11, '2020-12-14 10:43:01', '2020-12-14 10:43:02'),
+	(34, 'Electricidad', 11, '2020-12-14 10:43:08', '2020-12-14 10:43:09'),
+	(35, 'Carpinteria', 12, '2020-12-14 10:43:25', '2020-12-14 10:43:25'),
+	(36, 'Multiservicio', 12, '2020-12-14 10:43:36', '2020-12-14 10:43:36'),
+	(37, 'Carpinteria', 13, '2020-12-14 10:43:54', '2020-12-14 10:43:55'),
+	(38, 'Electricidad', 13, '2020-12-14 10:44:02', '2020-12-14 10:44:03'),
+	(39, 'Gasfiteria', 13, '2020-12-14 10:44:12', '2020-12-14 10:44:12'),
+	(40, 'Mecanica', 13, '2020-12-14 10:44:19', '2020-12-14 10:44:19'),
+	(41, 'Multiservicio', 13, '2020-12-14 10:45:03', '2020-12-14 10:45:04'),
+	(42, 'Oxiginista', 13, '2020-12-14 10:45:14', '2020-12-14 10:45:15'),
+	(43, 'Pintura', 13, '2020-12-14 10:45:21', '2020-12-14 10:45:21');
+/*!40000 ALTER TABLE `material_servicios` ENABLE KEYS */;
+
+-- Volcando datos para la tabla bodegarrff.material_tipos: ~30 rows (aproximadamente)
+/*!40000 ALTER TABLE `material_tipos` DISABLE KEYS */;
+INSERT IGNORE INTO `material_tipos` (`id`, `descripcion_tipo_material`, `id_material`, `created_at`, `updated_at`) VALUES
+	(1, 'Acero', 1, '2020-12-15 09:26:43', '2020-12-15 09:26:43'),
+	(2, 'Aluminio', 1, '2020-12-15 09:26:44', '2020-12-15 09:26:44'),
+	(3, 'Metal', 1, '2020-12-15 09:26:45', '2020-12-15 09:26:45'),
+	(4, 'PVC', 1, '2020-12-15 09:26:46', '2020-12-15 09:26:47'),
+	(5, 'Ninguno', 2, '2020-12-15 09:57:21', '2020-12-15 09:57:22'),
+	(6, 'Muriatico', 3, '2020-12-15 09:57:22', '2020-12-15 09:57:23'),
+	(7, 'Americano', 21, '2020-12-15 09:57:24', '2020-12-15 09:57:24'),
+	(8, 'Universal', 21, '2020-12-15 09:57:25', '2020-12-15 09:57:25'),
+	(9, 'Cargador', 21, '2020-12-15 09:57:25', '2020-12-15 09:57:25'),
+	(10, 'Epoxico', 4, '2020-12-15 09:57:26', '2020-12-15 09:57:26'),
+	(11, 'Ceramico', 4, '2020-12-15 09:57:27', '2020-12-15 09:57:27'),
+	(12, 'Instantaneo', 4, '2020-12-15 09:57:28', '2020-12-15 09:57:28'),
+	(13, 'Ninguno', 5, '2020-12-15 09:57:29', '2020-12-15 09:57:29'),
+	(14, 'Ninguno', 6, '2020-12-15 09:57:29', '2020-12-15 09:57:30'),
+	(15, 'Ninguno', 7, '2020-12-15 09:57:30', '2020-12-15 09:57:30'),
+	(16, '662x662x317', 8, '2020-12-15 09:57:31', '2020-12-15 09:57:31'),
+	(17, '900x900x257', 8, '2020-12-15 09:57:32', '2020-12-15 09:57:32'),
+	(18, 'Ninguno', 9, '2020-12-15 09:57:33', '2020-12-15 09:57:33'),
+	(19, 'Acero', 10, '2020-12-15 09:57:34', '2020-12-15 09:57:34'),
+	(20, 'Tenaza', 11, '2020-12-15 09:57:34', '2020-12-15 09:57:35'),
+	(21, 'Generico', 11, '2020-12-15 09:57:36', '2020-12-15 09:57:36'),
+	(22, 'PLC', 12, '2020-12-15 09:57:37', '2020-12-15 09:57:37'),
+	(23, 'Ninguno', 13, '2020-12-15 09:57:38', '2020-12-15 09:57:38'),
+	(24, 'Estructural Negro', 14, '2020-12-15 09:57:39', '2020-12-15 09:57:39'),
+	(25, 'Generico', 15, '2020-12-15 09:57:40', '2020-12-15 09:57:40'),
+	(26, 'Industrial', 17, '2020-12-15 09:57:41', '2020-12-15 09:57:41'),
+	(27, 'Buscapolo', 19, '2020-12-15 09:57:42', '2020-12-15 09:57:42'),
+	(28, 'Inalambrico', 19, '2020-12-15 09:57:43', '2020-12-15 09:57:43'),
+	(29, 'Generico', 20, '2020-12-15 09:57:44', '2020-12-15 09:57:44'),
+	(30, 'Blanca', 22, '2020-12-15 16:54:23', '2020-12-15 16:54:23'),
+	(31, '18 MM', 23, '2020-12-21 11:36:59', '2020-12-21 11:36:59'),
+	(32, 'Esmalte Al Agua - Blanco', 24, '2020-12-21 15:11:16', '2020-12-21 15:11:16'),
+	(33, 'PVC 25mm', 25, '2020-12-21 15:23:56', '2020-12-21 15:23:56'),
+	(34, 'Esmalte Al Agua - Celeste', 24, '2020-12-21 15:25:55', '2020-12-21 15:25:55'),
+	(35, 'Gas', 26, '2020-12-22 13:57:24', '2020-12-22 13:57:24');
+/*!40000 ALTER TABLE `material_tipos` ENABLE KEYS */;
+
+-- Volcando datos para la tabla bodegarrff.material_ubicaciones: ~11 rows (aproximadamente)
+/*!40000 ALTER TABLE `material_ubicaciones` DISABLE KEYS */;
+INSERT IGNORE INTO `material_ubicaciones` (`id`, `descripcion_ubicacion`, `created_at`, `updated_at`) VALUES
+	(1, 'Bodega Principal', '2020-12-14 10:30:30', '2020-12-14 10:30:31'),
+	(2, 'Bodega Secundaria', '2020-12-14 10:30:40', '2020-12-14 10:30:40'),
+	(3, 'Cuarto Escalera', '2020-12-14 10:30:49', '2020-12-14 10:30:49'),
+	(4, 'Jaula', '2020-12-14 10:30:54', '2020-12-14 10:30:55'),
+	(5, 'Jaula Mueble Blanco', '2020-12-14 10:31:05', '2020-12-14 10:31:06'),
+	(6, 'Jaula Nivel 0', '2020-12-14 10:31:33', '2020-12-14 10:31:33'),
+	(7, 'Jaula Nivel 1', '2020-12-14 10:31:42', '2020-12-14 10:31:42'),
+	(8, 'Jaula Nivel 2', '2020-12-14 10:31:49', '2020-12-14 10:31:49'),
+	(9, 'Jaula Nivel 3', '2020-12-14 10:31:57', '2020-12-14 10:31:57'),
+	(10, 'Jaula Nivel 4', '2020-12-14 10:32:03', '2020-12-14 10:32:04'),
+	(11, 'Jaula Nivel 5', '2020-12-14 10:32:13', '2020-12-14 10:32:13'),
+	(12, 'Jaula Suelo', '2020-12-14 10:32:20', '2020-12-14 10:32:20'),
+	(13, 'Sala Start', '2020-12-14 10:32:26', '2020-12-14 10:32:26');
+/*!40000 ALTER TABLE `material_ubicaciones` ENABLE KEYS */;
+
+-- Volcando datos para la tabla bodegarrff.migrations: ~16 rows (aproximadamente)
+/*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
+INSERT IGNORE INTO `migrations` (`id`, `migration`, `batch`) VALUES
+	(1, '2014_10_12_000000_create_users_table', 1),
+	(2, '2016_06_01_000001_create_oauth_auth_codes_table', 1),
+	(3, '2016_06_01_000002_create_oauth_access_tokens_table', 1),
+	(4, '2016_06_01_000003_create_oauth_refresh_tokens_table', 1),
+	(5, '2016_06_01_000004_create_oauth_clients_table', 1),
+	(6, '2016_06_01_000005_create_oauth_personal_access_clients_table', 1),
+	(7, '2020_12_11_095137_tbl_permiso_usuarios', 2),
+	(11, '2020_12_11_095137_tbl_permiso_usuarios', 2),
+	(12, '2020_12_14_090841_material_ubicaciones', 2),
+	(13, '2020_12_14_090912_material_servicios', 2),
+	(14, '2020_12_14_164552_material_medidas', 3),
+	(15, '2020_12_15_083248_material_ingresados', 4),
+	(16, '2020_12_15_083334_material_tipos', 4),
+	(27, '2020_12_15_122226_material_cantidades_especificas', 5),
+	(28, '2020_12_17_090224_material_inventarios', 5),
+	(29, '2020_12_17_101125_documento_asociados', 5),
+	(30, '2020_12_15_122226_material_cantidades_especificas', 5),
+	(31, '2020_12_17_090224_material_inventarios', 5),
+	(32, '2020_12_17_101125_documento_asociados', 5),
+	(33, '2020_12_15_122226_material_cantidades_especificas', 5),
+	(34, '2020_12_17_090224_material_inventarios', 5),
+	(35, '2020_12_17_101125_documento_asociados', 5);
+/*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
+
+-- Volcando datos para la tabla bodegarrff.oauth_access_tokens: ~0 rows (aproximadamente)
+/*!40000 ALTER TABLE `oauth_access_tokens` DISABLE KEYS */;
+/*!40000 ALTER TABLE `oauth_access_tokens` ENABLE KEYS */;
+
+-- Volcando datos para la tabla bodegarrff.oauth_auth_codes: ~0 rows (aproximadamente)
+/*!40000 ALTER TABLE `oauth_auth_codes` DISABLE KEYS */;
+/*!40000 ALTER TABLE `oauth_auth_codes` ENABLE KEYS */;
+
+-- Volcando datos para la tabla bodegarrff.oauth_clients: ~0 rows (aproximadamente)
+/*!40000 ALTER TABLE `oauth_clients` DISABLE KEYS */;
+/*!40000 ALTER TABLE `oauth_clients` ENABLE KEYS */;
+
+-- Volcando datos para la tabla bodegarrff.oauth_personal_access_clients: ~0 rows (aproximadamente)
+/*!40000 ALTER TABLE `oauth_personal_access_clients` DISABLE KEYS */;
+/*!40000 ALTER TABLE `oauth_personal_access_clients` ENABLE KEYS */;
+
+-- Volcando datos para la tabla bodegarrff.oauth_refresh_tokens: ~0 rows (aproximadamente)
+/*!40000 ALTER TABLE `oauth_refresh_tokens` DISABLE KEYS */;
+/*!40000 ALTER TABLE `oauth_refresh_tokens` ENABLE KEYS */;
+
+-- Volcando datos para la tabla bodegarrff.tbl_permiso_usuarios: ~0 rows (aproximadamente)
+/*!40000 ALTER TABLE `tbl_permiso_usuarios` DISABLE KEYS */;
+INSERT IGNORE INTO `tbl_permiso_usuarios` (`id`, `run_usuario`, `permiso_usuario`, `estado_login`, `created_at`, `updated_at`) VALUES
+	(1, '18499714-2', '1', '1', '2020-12-11 10:09:55', '2020-12-11 10:09:55');
+/*!40000 ALTER TABLE `tbl_permiso_usuarios` ENABLE KEYS */;
+
+-- Volcando datos para la tabla bodegarrff.users: ~0 rows (aproximadamente)
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT IGNORE INTO `users` (`id`, `run`, `nombre_usuario`, `apellido_usuario`, `anexo`, `correo_usuario`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
+	(1, '18499714-2', 'Ricardo', 'Soto', 286857, 'ricardo.soto.g@redsalud.gov.cl', '$2y$12$kPkY5nQohwxk5UQdFKs83eSOvlj8kdcSLlWMeq.v87Tw9gltZxQ7C', NULL, '2020-12-11 10:15:56', '2020-12-11 10:15:57');
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+
+/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
+/*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

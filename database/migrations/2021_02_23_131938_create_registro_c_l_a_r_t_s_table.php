@@ -15,13 +15,14 @@ class CreateRegistroCLARTSTable extends Migration
     {
         Schema::create('registroCLARTS', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('idART');
+            $table->bigInteger('idART')->nullable();
             $table->bigInteger('idProveedor');
             $table->bigInteger('monto');
-            $table->string('nfactura');
-            $table->date('fechaemifac');
-            $table->date('fechaentcont');
+            $table->string('nfactura')->nullable();
+            $table->date('fechaemifac')->nullable();
+            $table->date('fechaentcont')->nullable();
             $table->bigInteger('idCategoria');
+            $table->bigInteger('idEstado')->nullable();
             $table->timestamps();
         });
     }

@@ -31,8 +31,13 @@
                             <info-icon
                                 size="1.5x"
                                 class="custom-class"
-                                @click="informacionGeneral(props.row.id)"
+                                @click="informacionGeneral(props.row.idART)"
                             ></info-icon>
+                            <upload-icon
+                                size="1.5x"
+                                class="custom-class"
+                                @click="cambiarEstado(props.row.idART)"
+                            ></upload-icon>
                         </span>
 
                         <!-- Column: Common -->
@@ -166,6 +171,40 @@
                     </div>
                 </div>
             </vs-popup>
+            <vs-popup
+                classContent="popEstado"
+                title="Cambiar Estado"
+                :active.sync="popEstado"
+            >
+                <div class="vx-col md:w-1/1 w-full mb-base">
+                    <div class="vx-row">
+                        <div class="vx-col sm:w-full w-full ">
+                            <vx-card>
+                                <div class="vx-col sm:w-full w-full ">
+                                    <h6>Estado:</h6>
+                                    <br />
+                                    <v-select
+                                        class="w-full select-large"
+                                        taggable
+                                        label="descripcionEstado"
+                                        v-model="seleccionEstados"
+                                        :options="listadoEstados"
+                                    ></v-select>
+                                </div>
+                                <br />
+                                <div class="vx-col sm:w-full w-full ">
+                                    <vs-button
+                                        class="fixedHeight w-full"
+                                        color="warning"
+                                        @click="guardarCambioEstado()"
+                                        >Realizar Cambio</vs-button
+                                    >
+                                </div>
+                            </vx-card>
+                        </div>
+                    </div>
+                </div>
+            </vs-popup>
         </div>
     </vs-row>
 </template>
@@ -217,6 +256,7 @@ export default {
             fileName: "",
             popGuardarDoc: false,
             popVerDoc: false,
+            popEstado: false,
             columns: [
                 {
                     label: "ID",
@@ -262,6 +302,10 @@ export default {
                     dateOutputFormat: "dd/MM/yyyy"
                 },
                 {
+                    label: "Estado",
+                    field: "descripcionEstado"
+                },
+                {
                     label: "Opciones",
                     field: "action"
                 }
@@ -278,16 +322,26 @@ export default {
                     type: "number"
                 },
                 {
+                    label: "Descripcion Documento",
+                    field: "descripcionDocumento"
+                },
+                {
                     label: "Documentos",
                     field: "action"
                 }
             ],
             listadoCLART: [],
             listadoRegistroDocumentos: [],
+            listadoEstados: [],
+            seleccionEstados: {
+                id: 0,
+                descripcionEstado: ""
+            },
             idART: 0,
             localVal: process.env.MIX_APP_URL,
             urlDocumentos: process.env.MIX_APP_URL_DOCUMENTOS,
-            image: ""
+            image: "",
+            idARTEstado: 0
         };
     },
     methods: {
@@ -324,6 +378,95 @@ export default {
         getImage(event) {
             //Asignamos la imagen a  nuestra data
             this.image = event.target.files[0];
+            this.desDoc = this.image.name;
+        },
+        cambiarEstado(idART) {
+            this.idARTEstado = idART;
+            this.popEstado = true;
+        },
+        guardarCambioEstado() {
+            try {
+                if (this.seleccionEstados.id == 4) {
+                    let fecha = moment().format("DD-MM-YYYY HH:mm:ss");
+                    let data = {
+                        idART: this.idARTEstado,
+                        idEstado: this.seleccionEstados.id,
+                        fechaEmisionContabilidad: fecha
+                    };
+                    axios
+                        .post(
+                            this.localVal +
+                                "/api/CLART/PUTCambiarEstadoContabilidad",
+                            data,
+                            {
+                                headers: {
+                                    Authorization:
+                                        `Bearer ` +
+                                        sessionStorage.getItem("token")
+                                }
+                            }
+                        )
+                        .then(response => {
+                            let resp = response.data;
+                            if (resp == true) {
+                                this.$vs.notify({
+                                    title: "Estado Cambiado ",
+                                    text: "Se recargaran Listados ",
+                                    color: "success",
+                                    position: "top-right"
+                                });
+                                this.cargarCLART();
+                                this.popEstado = false;
+                            } else {
+                                this.$vs.notify({
+                                    title: "Error al cambiar Estado  ",
+                                    text: "Intente nuevamente  ",
+                                    color: "danger",
+                                    position: "top-right"
+                                });
+                            }
+                        });
+                } else {
+                    let data = {
+                        idART: this.idARTEstado,
+                        idEstado: this.seleccionEstados.id
+                    };
+                    axios
+                        .post(
+                            this.localVal + "/api/CLART/PUTCambiarEstado",
+                            data,
+                            {
+                                headers: {
+                                    Authorization:
+                                        `Bearer ` +
+                                        sessionStorage.getItem("token")
+                                }
+                            }
+                        )
+                        .then(response => {
+                            let resp = response.data;
+                            if (resp == true) {
+                                this.$vs.notify({
+                                    title: "Estado Cambiado ",
+                                    text: "Se recargaran Listados ",
+                                    color: "success",
+                                    position: "top-right"
+                                });
+                                this.cargarCLART();
+                                this.popEstado = false;
+                            } else {
+                                this.$vs.notify({
+                                    title: "Error al cambiar Estado  ",
+                                    text: "Intente nuevamente  ",
+                                    color: "danger",
+                                    position: "top-right"
+                                });
+                            }
+                        });
+                }
+            } catch (error) {
+                console.log(error);
+            }
         },
         uploadImage() {
             //Creamos el formData
@@ -331,6 +474,7 @@ export default {
             //Añadimos la imagen seleccionada
             data.append("avatar", this.image);
             data.append("id", this.idART);
+            data.append("nombreDoc", this.desDoc);
             axios
                 .post(this.localVal + "/api/CLART/PostDocumentoF", data, {
                     headers: {
@@ -388,10 +532,27 @@ export default {
             } catch (error) {
                 console.log(error);
             }
+        },
+        cargarEstados() {
+            try {
+                axios
+                    .get(this.localVal + "/api/CLART/GetEstados", {
+                        headers: {
+                            Authorization:
+                                `Bearer ` + sessionStorage.getItem("token")
+                        }
+                    })
+                    .then(res => {
+                        this.listadoEstados = res.data;
+                    });
+            } catch (error) {
+                console.log(error);
+            }
         }
     },
     created: function() {
         this.cargarCLART();
+        this.cargarEstados();
     }
 };
 </script>
