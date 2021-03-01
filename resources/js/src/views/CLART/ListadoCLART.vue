@@ -940,24 +940,18 @@ export default {
         },
         modificarCLART() {
             try {
-                //Creamos el formData
-                var data = new FormData();
-                //Añadimos la imagen seleccionada
-                data.append("avatar", this.image);
-                data.append("id", this.idART);
-                data.append("nombreDoc", this.desDoc);
-
                 //Data en objeto para Registro
                 let objeto = {
-                    idART: this.idART,
+                    idART: this.idARTMOD,
                     idProveedor: this.seleccionProveedor.id,
                     monto: this.montof,
                     nfactura: this.nfactura,
                     fechaemifac: this.fechaFactura,
-                    fechaentcont: this.fechaEmisionContabilidad,
-                    idCategoria: 3,
-                    idEstado: this.seleccionEstados.id
+                    fechaentcont: this.fechaEmisionContabilidad
+                    //idCategoria: 3,
+                    //idEstado: this.seleccionEstados.id
                 };
+                console.log(objeto);
 
                 const dat = objeto;
 

@@ -200,7 +200,7 @@ class RegistroCLARTSController extends Controller
         try {
             RegistroCLARTS::where('idART', $request->idART)
                 ->update(['nfactura'=> $request->nfactura,'monto' => $request->monto,'idProveedor' => $request->idProveedor,
-                'idEstado' => $request->idEstado,'fechaemifac' => $request->fechaemifac,'fechaentcont' => $request->fechaEmisionContabilidad]);
+                'fechaemifac' => $request->fechaemifac,'fechaentcont' => $request->fechaentcont]);
                 return true;
         } catch (\Throwable $th) {
             log::info($th);
