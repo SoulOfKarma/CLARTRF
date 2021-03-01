@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\RegistroCLARTS;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use DB;
 
 class RegistroCLARTSController extends Controller
 {
+    protected $dateFormat = 'U';
     /**
      * Display a listing of the resource.
      *
@@ -28,7 +30,7 @@ class RegistroCLARTSController extends Controller
         try {
             $get_all = registroCLARTS::select("registroCLARTS.id","registroCLARTS.idART","proveedores.rutProveedor",
             "proveedores.descripcionProveedor","registroCLARTS.monto","registroCLARTS.nfactura","registroCLARTS.fechaemifac",
-            "registroCLARTS.fechaentcont","estados.descripcionEstado")
+            "registroCLARTS.fechaentcont",DB::raw("DATE_FORMAT(registroCLARTS.updated_at,'%Y-%m-%d') as updated_at"),"estados.descripcionEstado")
             ->join("proveedores","registroCLARTS.idProveedor","=","proveedores.id")
             ->join("estados","registroCLARTS.idEstado","=","estados.id")
             ->where("registroCLARTS.idCategoria",1)
@@ -44,7 +46,7 @@ class RegistroCLARTSController extends Controller
         try {
             $get_all = registroCLARTS::select("registroCLARTS.id","registroCLARTS.idART","proveedores.rutProveedor",
             "proveedores.descripcionProveedor","registroCLARTS.monto","registroCLARTS.nfactura","registroCLARTS.fechaemifac",
-            "registroCLARTS.fechaentcont","estados.descripcionEstado")
+            "registroCLARTS.fechaentcont",DB::raw("DATE_FORMAT(registroCLARTS.updated_at,'%Y-%m-%d') as updated_at"),"estados.descripcionEstado")
             ->join("proveedores","registroCLARTS.idProveedor","=","proveedores.id")
             ->join("estados","registroCLARTS.idEstado","=","estados.id")
             ->where("registroCLARTS.idCategoria",2)
@@ -60,7 +62,7 @@ class RegistroCLARTSController extends Controller
         try {
             $get_all = registroCLARTS::select("registroCLARTS.id","registroCLARTS.idART","proveedores.rutProveedor",
             "proveedores.descripcionProveedor","registroCLARTS.monto","registroCLARTS.nfactura","registroCLARTS.fechaemifac",
-            "registroCLARTS.fechaentcont","estados.descripcionEstado")
+            "registroCLARTS.fechaentcont",DB::raw("DATE_FORMAT(registroCLARTS.updated_at,'%Y-%m-%d') as updated_at"),"estados.descripcionEstado")
             ->join("proveedores","registroCLARTS.idProveedor","=","proveedores.id")
             ->join("estados","registroCLARTS.idEstado","=","estados.id")
             ->where("registroCLARTS.idCategoria",3)
@@ -76,7 +78,7 @@ class RegistroCLARTSController extends Controller
         try {
             $get_all = registroCLARTS::select("registroCLARTS.id","registroCLARTS.idART","proveedores.rutProveedor",
             "proveedores.descripcionProveedor","registroCLARTS.monto","registroCLARTS.nfactura","registroCLARTS.fechaemifac",
-            "registroCLARTS.fechaentcont","estados.descripcionEstado")
+            "registroCLARTS.fechaentcont",DB::raw("DATE_FORMAT(registroCLARTS.updated_at,'%Y-%m-%d') as updated_at"),"estados.descripcionEstado")
             ->join("proveedores","registroCLARTS.idProveedor","=","proveedores.id")
             ->join("estados","registroCLARTS.idEstado","=","estados.id")
             ->where("registroCLARTS.idCategoria",4)
@@ -95,7 +97,7 @@ class RegistroCLARTSController extends Controller
         try {
             $get_all = registroCLARTS::select("registroCLARTS.id","registroCLARTS.idART","proveedores.rutProveedor",
             "proveedores.descripcionProveedor","registroCLARTS.monto","registroCLARTS.nfactura","registroCLARTS.fechaemifac",
-            "registroCLARTS.fechaentcont","estados.descripcionEstado")
+            "registroCLARTS.fechaentcont", DB::raw("DATE_FORMAT(registroCLARTS.updated_at,'%Y-%m-%d') as updated_at"),"estados.descripcionEstado")
             ->join("proveedores","registroCLARTS.idProveedor","=","proveedores.id")
             ->join("estados","registroCLARTS.idEstado","=","estados.id")
             ->get();

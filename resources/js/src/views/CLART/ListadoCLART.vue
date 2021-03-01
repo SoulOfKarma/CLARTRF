@@ -302,6 +302,13 @@ export default {
                     dateOutputFormat: "dd/MM/yyyy"
                 },
                 {
+                    label: "Fecha Ultima Actualizacion",
+                    field: "updated_at",
+                    type: "date",
+                    dateInputFormat: "yyyy-MM-dd",
+                    dateOutputFormat: "dd/MM/yyyy"
+                },
+                {
                     label: "Estado",
                     field: "descripcionEstado"
                 },
@@ -387,7 +394,7 @@ export default {
         guardarCambioEstado() {
             try {
                 if (this.seleccionEstados.id == 4) {
-                    let fecha = moment().format("DD-MM-YYYY HH:mm:ss");
+                    let fecha = moment().format("YYYY-MM-DD");
                     let data = {
                         idART: this.idARTEstado,
                         idEstado: this.seleccionEstados.id,
@@ -523,6 +530,10 @@ export default {
                         let b = [];
 
                         list.forEach((value, index) => {
+                            let fecha = moment(value.updated_at).format(
+                                "YYYY-MM-DD"
+                            );
+                            value.updated_at = fecha;
                             value.monto = formatter.format(value.monto);
                             b.push(value);
                         });

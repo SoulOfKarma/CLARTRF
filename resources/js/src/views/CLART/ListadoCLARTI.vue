@@ -302,6 +302,13 @@ export default {
                     dateOutputFormat: "dd/MM/yyyy"
                 },
                 {
+                    label: "Fecha Ultima Actualizacion",
+                    field: "updated_at",
+                    type: "date",
+                    dateInputFormat: "yyyy-MM-dd",
+                    dateOutputFormat: "dd/MM/yyyy"
+                },
+                {
                     label: "Estado",
                     field: "descripcionEstado"
                 },
@@ -425,9 +432,11 @@ export default {
                             }
                         });
                 } else {
+                    let fecha = moment().format("YYYY-MM-DD");
                     let data = {
                         idART: this.idARTEstado,
-                        idEstado: this.seleccionEstados.id
+                        idEstado: this.seleccionEstados.id,
+                        fechaEmisionContabilidad: fecha
                     };
                     axios
                         .post(
@@ -521,6 +530,10 @@ export default {
                         let b = [];
 
                         list.forEach((value, index) => {
+                            let fecha = moment(value.updated_at).format(
+                                "YYYY-MM-DD"
+                            );
+                            value.updated_at = fecha;
                             value.monto = formatter.format(value.monto);
                             b.push(value);
                         });
