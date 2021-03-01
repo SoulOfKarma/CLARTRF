@@ -32,6 +32,7 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::get('/CLART/GetRegistroCLARTSCatI', ['middleware' => 'cors', 'uses' => 'RegistroCLARTSController@indexCatI']);
     Route::get('/CLART/GetRegistroCLARTSCatAP', ['middleware' => 'cors', 'uses' => 'RegistroCLARTSController@indexCatAP']);
     Route::get('/CLART/GetRegistroCLARTSCatMI', ['middleware' => 'cors', 'uses' => 'RegistroCLARTSController@indexCatMI']);
+    Route::get('/CLART/GetCLARTByART/{id}', ['middleware' => 'cors', 'uses' => 'RegistroCLARTSController@GetCLARTByART']);
     
     //Posts 
     Route::post('/CLART/PostDocumentoF', ['middleware' => 'cors', 'uses' => 'RepositorioDocumentacionesController@store']);
@@ -40,5 +41,6 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     //PUT Como Post
     Route::post('/CLART/PUTCambiarEstado', ['middleware' => 'cors', 'uses' => 'RegistroCLARTSController@PUTEstado']);
     Route::post('/CLART/PUTCambiarEstadoContabilidad', ['middleware' => 'cors', 'uses' => 'RegistroCLARTSController@PUTEstadoContabilidad']);
+    Route::post('/CLART/PUTRegistroCLART', ['middleware' => 'cors', 'uses' => 'RegistroCLARTSController@PUTRegistroCLART']);
 
 });

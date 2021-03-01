@@ -108,6 +108,23 @@ class RegistroCLARTSController extends Controller
         }
     }
 
+    public function GetCLARTByART($idART){
+        try {
+            $get_all = registroCLARTS::select("registroCLARTS.id","registroCLARTS.idART","proveedores.rutProveedor",
+            "proveedores.descripcionProveedor","registroCLARTS.monto","registroCLARTS.nfactura","registroCLARTS.fechaemifac",
+            "registroCLARTS.fechaentcont", DB::raw("DATE_FORMAT(registroCLARTS.updated_at,'%Y-%m-%d') as updated_at"),
+            "estados.descripcionEstado","registroCLARTS.idProveedor","registroCLARTS.idEstado")
+            ->join("proveedores","registroCLARTS.idProveedor","=","proveedores.id")
+            ->join("estados","registroCLARTS.idEstado","=","estados.id")
+            ->where("registroCLARTS.idART",$idART)
+            ->get();
+            return $get_all;
+        } catch (\Throwable $th) {
+            log::info($th);
+            return false;
+        }
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -172,6 +189,18 @@ class RegistroCLARTSController extends Controller
         try {
             RegistroCLARTS::where('idART', $request->idART)
                 ->update(['idEstado' => $request->idEstado,'fechaentcont' => $request->fechaEmisionContabilidad]);
+                return true;
+        } catch (\Throwable $th) {
+            log::info($th);
+            return false;
+        }
+    }
+
+    public function PUTRegistroCLART(Request $request){
+        try {
+            RegistroCLARTS::where('idART', $request->idART)
+                ->update(['nfactura'=> $request->nfactura,'monto' => $request->monto,'idProveedor' => $request->idProveedor,
+                'idEstado' => $request->idEstado,'fechaemifac' => $request->fechaemifac,'fechaentcont' => $request->fechaEmisionContabilidad]);
                 return true;
         } catch (\Throwable $th) {
             log::info($th);
