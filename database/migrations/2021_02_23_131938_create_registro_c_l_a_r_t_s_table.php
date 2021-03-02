@@ -15,7 +15,7 @@ class CreateRegistroCLARTSTable extends Migration
     {
         Schema::create('registroCLARTS', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('idART')->nullable();
+            $table->string('idART')->nullable();
             $table->bigInteger('idProveedor');
             $table->bigInteger('monto');
             $table->string('nfactura')->nullable();

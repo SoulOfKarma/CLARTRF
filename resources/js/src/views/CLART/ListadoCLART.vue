@@ -26,7 +26,7 @@
                             <plus-circle-icon
                                 size="1.5x"
                                 class="custom-class"
-                                @click="agregarNuevoDocumento(props.row.id)"
+                                @click="agregarNuevoDocumento(props.row.idART)"
                             ></plus-circle-icon>
                             <info-icon
                                 size="1.5x"
@@ -41,7 +41,7 @@
                             <upload-cloud-icon
                                 size="1.5x"
                                 class="custom-class"
-                                @click="popModART(props.row.idART)"
+                                @click="popModART(props.row.id)"
                             ></upload-cloud-icon>
                         </span>
 
@@ -228,7 +228,6 @@
                                         <vs-input
                                             class="inputx w-full"
                                             v-model="idARTMOD"
-                                            @keypress="isNumber($event)"
                                         ></vs-input>
                                     </div>
                                     <div class="vx-col w-1/2 mt-5">
@@ -416,8 +415,7 @@ export default {
                 },
                 {
                     label: "ID ART",
-                    field: "idART",
-                    type: "number"
+                    field: "idART"
                 },
                 {
                     label: "Rut Proveedor",
@@ -627,11 +625,11 @@ export default {
                 descripcionProveedor: ""
             },
             seleccionEstados: {
-                id: 0,
-                descripcionEstado: ""
+                id: 1,
+                descripcionEstado: "Ingresado"
             },
-            fechaEmisionContabilidad: new Date(),
-            fechaFactura: new Date(),
+            fechaEmisionContabilidad: moment().format("YYYY-MM-DD"),
+            fechaFactura: moment().format("YYYY-MM-DD"),
             image: "",
             value3: "",
             idARTMOD: "",
@@ -641,7 +639,8 @@ export default {
             listadoProveedores: [],
             listadoEstados: [],
             listadoModClart: [],
-            desDoc: ""
+            desDoc: "",
+            idMod: 0
         };
     },
     methods: {
@@ -653,10 +652,13 @@ export default {
         informacionGeneral(id) {
             try {
                 this.popVerDoc = true;
+                let objeto = {
+                    idART: id
+                };
                 axios
-                    .get(
-                        this.localVal +
-                            `/api/CLART/GetRegistroDocumentosF/${id}`,
+                    .post(
+                        this.localVal + "/api/CLART/GetRegistroDocumentosF",
+                        objeto,
                         {
                             headers: {
                                 Authorization:
@@ -691,7 +693,8 @@ export default {
                     })
                     .then(res => {
                         this.listadoModClart = res.data;
-                        this.idARTMOD = id;
+                        this.idMod = id;
+                        this.idARTMOD = this.listadoModClart[0].idART;
                         this.seleccionEstados.id = this.listadoModClart[0].idEstado;
                         this.seleccionEstados.descripcionEstado = this.listadoModClart[0].descripcionEstado;
                         this.seleccionProveedor.id = this.listadoModClart[0].idProveedor;
@@ -716,6 +719,10 @@ export default {
         cambiarEstado(idART) {
             this.idARTEstado = idART;
             this.popEstado = true;
+            this.seleccionEstados = {
+                id: 1,
+                descripcionEstado: "Ingresado"
+            };
         },
         guardarCambioEstado() {
             try {
@@ -942,8 +949,10 @@ export default {
             try {
                 //Data en objeto para Registro
                 let objeto = {
+                    id: this.idMod,
                     idART: this.idARTMOD,
                     idProveedor: this.seleccionProveedor.id,
+                    idEstado: this.seleccionEstados.id,
                     monto: this.montof,
                     nfactura: this.nfactura,
                     fechaemifac: this.fechaFactura,
@@ -951,7 +960,6 @@ export default {
                     //idCategoria: 3,
                     //idEstado: this.seleccionEstados.id
                 };
-                console.log(objeto);
 
                 const dat = objeto;
 

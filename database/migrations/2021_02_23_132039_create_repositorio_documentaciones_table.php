@@ -15,7 +15,7 @@ class CreateRepositorioDocumentacionesTable extends Migration
     {
         Schema::create('repositorio_documentaciones', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('idCLART');
+            $table->string('idCLART');
             $table->string('descripcionDocumento')->nullable();
             $table->string('nombreDocumento');
             $table->timestamps();

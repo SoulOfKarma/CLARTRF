@@ -1,0 +1,28 @@
+-- --------------------------------------------------------
+-- Host:                         localhost
+-- Versión del servidor:         5.7.24 - MySQL Community Server (GPL)
+-- SO del servidor:              Win64
+-- HeidiSQL Versión:             10.2.0.5599
+-- --------------------------------------------------------
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET NAMES utf8 */;
+/*!50503 SET NAMES utf8mb4 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+
+-- Volcando datos para la tabla artrrff.tbl_permiso_usuarios: ~0 rows (aproximadamente)
+/*!40000 ALTER TABLE `tbl_permiso_usuarios` DISABLE KEYS */;
+INSERT IGNORE INTO `tbl_permiso_usuarios` (`id`, `run_usuario`, `permiso_usuario`, `estado_login`, `created_at`, `updated_at`) VALUES
+	(1, '18499714-2', '1', '1', '2021-01-25 16:48:48', '2021-01-25 16:48:48');
+/*!40000 ALTER TABLE `tbl_permiso_usuarios` ENABLE KEYS */;
+
+-- Volcando datos para la tabla artrrff.users: ~0 rows (aproximadamente)
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT IGNORE INTO `users` (`id`, `run`, `email`, `nombre`, `apellido`, `password`, `api_token`, `remember_token`, `created_at`, `updated_at`) VALUES
+	(1, '18499714-2', 'ricardo.soto.g@redsalud.gov.cl', 'Ricardo', 0, '$2y$10$lcpGX10TS.gicAKnfda/oep4uZqQd/C8dUynV5OMfgDU.AkIFv7H.', '$2y$10$Ko/84JxcQImey3cWOjeDjOE6YiNKqrhTxx.tehul84YoflEJS.3H2', NULL, '2021-01-25 16:48:17', '2021-02-16 08:27:30');
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+
+/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
+/*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

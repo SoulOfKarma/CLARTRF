@@ -9,7 +9,6 @@
                         <vs-input
                             class="inputx w-full"
                             v-model="idART"
-                            @keypress="isNumber($event)"
                         ></vs-input>
                     </div>
                     <div class="vx-col w-1/2 mt-5">
@@ -285,11 +284,11 @@ export default {
                 descripcionProveedor: ""
             },
             seleccionEstados: {
-                id: 0,
-                descripcionEstado: ""
+                id: 1,
+                descripcionEstado: "Ingresado"
             },
-            fechaEmisionContabilidad: new Date(),
-            fechaFactura: new Date(),
+            fechaEmisionContabilidad: moment().format("YYYY-MM-DD"),
+            fechaFactura: moment().format("YYYY-MM-DD"),
             image: "",
             value3: "",
             idART: "",
@@ -356,76 +355,172 @@ export default {
         },
         guardarCLART() {
             try {
-                //Creamos el formData
-                var data = new FormData();
-                //Añadimos la imagen seleccionada
-                data.append("avatar", this.image);
-                data.append("id", this.idART);
-                data.append("nombreDoc", this.desDoc);
+                if (this.idART == null || this.idART == "") {
+                    this.$vs.notify({
+                        title: "Error ",
+                        text: "Campo ART no debe quedar en blanco ",
+                        color: "danger",
+                        position: "top-right"
+                    });
+                } else if (
+                    this.seleccionProveedor.id == 0 ||
+                    this.seleccionProveedor.id == null
+                ) {
+                    this.$vs.notify({
+                        title: "Error ",
+                        text: "Proveedor no Seleccionado ",
+                        color: "danger",
+                        position: "top-right"
+                    });
+                } else if (
+                    this.seleccionEstados.id == 0 ||
+                    this.seleccionEstados.id == null
+                ) {
+                    this.$vs.notify({
+                        title: "Error ",
+                        text: "Estado no Seleccionado ",
+                        color: "danger",
+                        position: "top-right"
+                    });
+                } else if (this.montof == 0 || this.montof == null) {
+                    this.$vs.notify({
+                        title: "Error ",
+                        text: "Monto no debe quedar en blanco ",
+                        color: "danger",
+                        position: "top-right"
+                    });
+                } else {
+                    if (
+                        this.imagen == "" ||
+                        this.imagen == null ||
+                        this.imagen == 0
+                    ) {
+                        //Data en objeto para Registro
+                        let objeto = {
+                            idART: this.idART,
+                            idProveedor: this.seleccionProveedor.id,
+                            monto: this.montof,
+                            nfactura: this.nfactura,
+                            fechaemifac: this.fechaFactura,
+                            fechaentcont: this.fechaEmisionContabilidad,
+                            idCategoria: 1,
+                            idEstado: this.seleccionEstados.id
+                        };
 
-                //Data en objeto para Registro
-                let objeto = {
-                    idART: this.idART,
-                    idProveedor: this.seleccionProveedor.id,
-                    monto: this.montof,
-                    nfactura: this.nfactura,
-                    fechaemifac: this.fechaFactura,
-                    fechaentcont: this.fechaEmisionContabilidad,
-                    idCategoria: 3,
-                    idEstado: this.seleccionEstados.id
-                };
+                        const dat = objeto;
 
-                const dat = objeto;
+                        axios
+                            .all([
+                                axios.post(
+                                    this.localVal +
+                                        "/api/CLART/PostRegistroCLART",
+                                    dat,
+                                    {
+                                        headers: {
+                                            Authorization:
+                                                `Bearer ` +
+                                                sessionStorage.getItem("token")
+                                        }
+                                    }
+                                )
+                            ])
+                            .then(
+                                axios.spread(res2 => {
+                                    let resp2 = res2.data;
 
-                axios
-                    .all([
-                        axios.post(
-                            this.localVal + "/api/CLART/PostDocumentoF",
-                            data,
-                            {
-                                headers: {
-                                    Authorization:
-                                        `Bearer ` +
-                                        sessionStorage.getItem("token")
-                                }
-                            }
-                        ),
-                        axios.post(
-                            this.localVal + "/api/CLART/PostRegistroCLART",
-                            dat,
-                            {
-                                headers: {
-                                    Authorization:
-                                        `Bearer ` +
-                                        sessionStorage.getItem("token")
-                                }
-                            }
-                        )
-                    ])
-                    .then(
-                        axios.spread((res1, res2) => {
-                            let resp1 = res1.data;
-                            let resp2 = res2.data;
+                                    if (resp2 == true) {
+                                        this.$vs.notify({
+                                            title: "Registro Guardado ",
+                                            text:
+                                                "Podra Visualizarlo en el menu del costado en el listado de ART ingresados ",
+                                            color: "success",
+                                            position: "top-right"
+                                        });
+                                        this.popupActive3 = false;
+                                    } else {
+                                        this.$vs.notify({
+                                            title: "Error al guardar registro ",
+                                            text: "Intente nuevamente ",
+                                            color: "danger",
+                                            position: "top-right"
+                                        });
+                                    }
+                                })
+                            );
+                    } else {
+                        //Creamos el formData
+                        var data = new FormData();
+                        //Añadimos la imagen seleccionada
+                        data.append("avatar", this.image);
+                        data.append("id", this.idART);
+                        data.append("nombreDoc", this.desDoc);
 
-                            if (resp1 == true && resp2 == true) {
-                                this.$vs.notify({
-                                    title: "Registro Guardado ",
-                                    text:
-                                        "Podra Visualizarlo en el menu del costado para descargarlo o visualizarlo en el navegador ",
-                                    color: "success",
-                                    position: "top-right"
-                                });
-                                this.popupActive3 = false;
-                            } else {
-                                this.$vs.notify({
-                                    title: "Error al guardar registro ",
-                                    text: "Intente nuevamente ",
-                                    color: "danger",
-                                    position: "top-right"
-                                });
-                            }
-                        })
-                    );
+                        //Data en objeto para Registro
+                        let objeto = {
+                            idART: this.idART,
+                            idProveedor: this.seleccionProveedor.id,
+                            monto: this.montof,
+                            nfactura: this.nfactura,
+                            fechaemifac: this.fechaFactura,
+                            fechaentcont: this.fechaEmisionContabilidad,
+                            idCategoria: 3,
+                            idEstado: this.seleccionEstados.id
+                        };
+
+                        const dat = objeto;
+
+                        axios
+                            .all([
+                                axios.post(
+                                    this.localVal + "/api/CLART/PostDocumentoF",
+                                    data,
+                                    {
+                                        headers: {
+                                            Authorization:
+                                                `Bearer ` +
+                                                sessionStorage.getItem("token")
+                                        }
+                                    }
+                                ),
+                                axios.post(
+                                    this.localVal +
+                                        "/api/CLART/PostRegistroCLART",
+                                    dat,
+                                    {
+                                        headers: {
+                                            Authorization:
+                                                `Bearer ` +
+                                                sessionStorage.getItem("token")
+                                        }
+                                    }
+                                )
+                            ])
+                            .then(
+                                axios.spread((res1, res2) => {
+                                    let resp1 = res1.data;
+                                    let resp2 = res2.data;
+
+                                    if (resp1 == true && resp2 == true) {
+                                        this.$vs.notify({
+                                            title: "Registro Guardado ",
+                                            text:
+                                                "Podra Visualizarlo en el menu del costado para descargarlo o visualizarlo en el navegador ",
+                                            color: "success",
+                                            position: "top-right"
+                                        });
+                                        this.popupActive3 = false;
+                                    } else {
+                                        this.$vs.notify({
+                                            title: "Error al guardar registro ",
+                                            text: "Intente nuevamente ",
+                                            color: "danger",
+                                            position: "top-right"
+                                        });
+                                    }
+                                })
+                            );
+                    }
+                }
             } catch (error) {
                 console.log(error);
             }

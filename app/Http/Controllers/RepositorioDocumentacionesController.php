@@ -24,10 +24,10 @@ class RepositorioDocumentacionesController extends Controller
         }
     }
 
-    public function showRegistroEspecifico($id){
+    public function showRegistroEspecifico(Request $request){
         try {
             $get_all = RepositorioDocumentaciones::select("*")
-            ->where("repositorio_documentaciones.idCLART", $id)
+            ->where("repositorio_documentaciones.idCLART", $request->idART)
             ->get();
             return $get_all;
         } catch (\Throwable $th) {
