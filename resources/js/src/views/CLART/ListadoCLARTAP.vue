@@ -945,60 +945,95 @@ export default {
         },
         modificarCLART() {
             try {
-                //Data en objeto para Registro
-                let objeto = {
-                    id: this.idMod,
-                    idART: this.idARTMOD,
-                    idProveedor: this.seleccionProveedor.id,
-                    idEstado: this.seleccionEstados.id,
-                    monto: this.montof,
-                    nfactura: this.nfactura,
-                    fechaemifac: this.fechaFactura,
-                    fechaentcont: this.fechaEmisionContabilidad
-                    //idCategoria: 3,
-                    //idEstado: this.seleccionEstados.id
-                };
+                if (this.idARTMOD == null || this.idARTMOD == "") {
+                    this.$vs.notify({
+                        title: "Error ",
+                        text: "Campo ART no debe quedar en blanco ",
+                        color: "danger",
+                        position: "top-right"
+                    });
+                } else if (
+                    this.seleccionProveedor.id == 0 ||
+                    this.seleccionProveedor.id == null
+                ) {
+                    this.$vs.notify({
+                        title: "Error ",
+                        text: "Proveedor no Seleccionado ",
+                        color: "danger",
+                        position: "top-right"
+                    });
+                } else if (
+                    this.seleccionEstados.id == 0 ||
+                    this.seleccionEstados.id == null
+                ) {
+                    this.$vs.notify({
+                        title: "Error ",
+                        text: "Estado no Seleccionado ",
+                        color: "danger",
+                        position: "top-right"
+                    });
+                } else if (this.montof == 0 || this.montof == null) {
+                    this.$vs.notify({
+                        title: "Error ",
+                        text: "Monto no debe quedar en blanco ",
+                        color: "danger",
+                        position: "top-right"
+                    });
+                } else {
+                    let objeto = {
+                        id: this.idMod,
+                        idART: this.idARTMOD,
+                        idProveedor: this.seleccionProveedor.id,
+                        idEstado: this.seleccionEstados.id,
+                        monto: this.montof,
+                        nfactura: this.nfactura,
+                        fechaemifac: this.fechaFactura,
+                        fechaentcont: this.fechaEmisionContabilidad
+                        //idCategoria: 3,
+                        //idEstado: this.seleccionEstados.id
+                    };
 
-                const dat = objeto;
+                    const dat = objeto;
 
-                axios
-                    .all([
-                        axios.post(
-                            this.localVal + "/api/CLART/PUTRegistroCLART",
-                            dat,
-                            {
-                                headers: {
-                                    Authorization:
-                                        `Bearer ` +
-                                        sessionStorage.getItem("token")
+                    axios
+                        .all([
+                            axios.post(
+                                this.localVal + "/api/CLART/PUTRegistroCLART",
+                                dat,
+                                {
+                                    headers: {
+                                        Authorization:
+                                            `Bearer ` +
+                                            sessionStorage.getItem("token")
+                                    }
                                 }
-                            }
-                        )
-                    ])
-                    .then(
-                        axios.spread(res1 => {
-                            let resp1 = res1.data;
+                            )
+                        ])
+                        .then(
+                            axios.spread(res1 => {
+                                let resp1 = res1.data;
 
-                            if (resp1 == true) {
-                                this.$vs.notify({
-                                    title: "Registro Modificado ",
-                                    text:
-                                        "Podra Visualizarlo en el listado que se recargara a continuacion",
-                                    color: "success",
-                                    position: "top-right"
-                                });
-                                this.cargarCLART();
-                                this.popUpdate = false;
-                            } else {
-                                this.$vs.notify({
-                                    title: "Error al guardar registro ",
-                                    text: "Intente nuevamente ",
-                                    color: "danger",
-                                    position: "top-right"
-                                });
-                            }
-                        })
-                    );
+                                if (resp1 == true) {
+                                    this.$vs.notify({
+                                        title: "Registro Modificado ",
+                                        text:
+                                            "Podra Visualizarlo en el listado que se recargara a continuacion",
+                                        color: "success",
+                                        position: "top-right"
+                                    });
+                                    this.cargarCLART();
+                                    this.popUpdate = false;
+                                } else {
+                                    this.$vs.notify({
+                                        title: "Error al guardar registro ",
+                                        text: "Intente nuevamente ",
+                                        color: "danger",
+                                        position: "top-right"
+                                    });
+                                }
+                            })
+                        );
+                }
             } catch (error) {
                 console.log(error);
             }
