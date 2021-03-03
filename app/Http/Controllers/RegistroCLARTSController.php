@@ -30,7 +30,7 @@ class RegistroCLARTSController extends Controller
         try {
             $get_all = registroCLARTS::select("registroCLARTS.id","registroCLARTS.idART","proveedores.rutProveedor",
             "proveedores.descripcionProveedor","registroCLARTS.monto","registroCLARTS.nfactura","registroCLARTS.fechaemifac",
-            "registroCLARTS.fechaentcont",DB::raw("DATE_FORMAT(registroCLARTS.updated_at,'%Y-%m-%d') as updated_at"),"estados.descripcionEstado")
+            DB::raw("IFNULL(registroCLARTS.fechaentcont,'Pendiente') as fechaentcont"),DB::raw("DATE_FORMAT(registroCLARTS.updated_at,'%Y-%m-%d') as updated_at"),"estados.descripcionEstado")
             ->join("proveedores","registroCLARTS.idProveedor","=","proveedores.id")
             ->join("estados","registroCLARTS.idEstado","=","estados.id")
             ->where("registroCLARTS.idCategoria",1)
@@ -46,7 +46,7 @@ class RegistroCLARTSController extends Controller
         try {
             $get_all = registroCLARTS::select("registroCLARTS.id","registroCLARTS.idART","proveedores.rutProveedor",
             "proveedores.descripcionProveedor","registroCLARTS.monto","registroCLARTS.nfactura","registroCLARTS.fechaemifac",
-            "registroCLARTS.fechaentcont",DB::raw("DATE_FORMAT(registroCLARTS.updated_at,'%Y-%m-%d') as updated_at"),"estados.descripcionEstado")
+            DB::raw("IFNULL(registroCLARTS.fechaentcont,'Pendiente') as fechaentcont"),DB::raw("DATE_FORMAT(registroCLARTS.updated_at,'%Y-%m-%d') as updated_at"),"estados.descripcionEstado")
             ->join("proveedores","registroCLARTS.idProveedor","=","proveedores.id")
             ->join("estados","registroCLARTS.idEstado","=","estados.id")
             ->where("registroCLARTS.idCategoria",2)
@@ -62,7 +62,7 @@ class RegistroCLARTSController extends Controller
         try {
             $get_all = registroCLARTS::select("registroCLARTS.id","registroCLARTS.idART","proveedores.rutProveedor",
             "proveedores.descripcionProveedor","registroCLARTS.monto","registroCLARTS.nfactura","registroCLARTS.fechaemifac",
-            "registroCLARTS.fechaentcont",DB::raw("DATE_FORMAT(registroCLARTS.updated_at,'%Y-%m-%d') as updated_at"),"estados.descripcionEstado")
+            DB::raw("IFNULL(registroCLARTS.fechaentcont,'Pendiente') as fechaentcont"),DB::raw("DATE_FORMAT(registroCLARTS.updated_at,'%Y-%m-%d') as updated_at"),"estados.descripcionEstado")
             ->join("proveedores","registroCLARTS.idProveedor","=","proveedores.id")
             ->join("estados","registroCLARTS.idEstado","=","estados.id")
             ->where("registroCLARTS.idCategoria",3)
@@ -78,7 +78,7 @@ class RegistroCLARTSController extends Controller
         try {
             $get_all = registroCLARTS::select("registroCLARTS.id","registroCLARTS.idART","proveedores.rutProveedor",
             "proveedores.descripcionProveedor","registroCLARTS.monto","registroCLARTS.nfactura","registroCLARTS.fechaemifac",
-            "registroCLARTS.fechaentcont",DB::raw("DATE_FORMAT(registroCLARTS.updated_at,'%Y-%m-%d') as updated_at"),"estados.descripcionEstado")
+            DB::raw("IFNULL(registroCLARTS.fechaentcont,'Pendiente') as fechaentcont"),DB::raw("DATE_FORMAT(registroCLARTS.updated_at,'%Y-%m-%d') as updated_at"),"estados.descripcionEstado")
             ->join("proveedores","registroCLARTS.idProveedor","=","proveedores.id")
             ->join("estados","registroCLARTS.idEstado","=","estados.id")
             ->where("registroCLARTS.idCategoria",4)
@@ -97,7 +97,7 @@ class RegistroCLARTSController extends Controller
         try {
             $get_all = registroCLARTS::select("registroCLARTS.id","registroCLARTS.idART","proveedores.rutProveedor",
             "proveedores.descripcionProveedor","registroCLARTS.monto","registroCLARTS.nfactura","registroCLARTS.fechaemifac",
-            "registroCLARTS.fechaentcont", DB::raw("DATE_FORMAT(registroCLARTS.updated_at,'%Y-%m-%d') as updated_at"),"estados.descripcionEstado")
+            DB::raw("IFNULL(registroCLARTS.fechaentcont,'Pendiente') as fechaentcont"), DB::raw("DATE_FORMAT(registroCLARTS.updated_at,'%Y-%m-%d') as updated_at"),"estados.descripcionEstado")
             ->join("proveedores","registroCLARTS.idProveedor","=","proveedores.id")
             ->join("estados","registroCLARTS.idEstado","=","estados.id")
             ->get();

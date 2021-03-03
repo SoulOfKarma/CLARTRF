@@ -444,10 +444,7 @@ export default {
                 },
                 {
                     label: "Fecha Entrega Contabilidad",
-                    field: "fechaentcont",
-                    type: "date",
-                    dateInputFormat: "yyyy-MM-dd",
-                    dateOutputFormat: "dd/MM/yyyy"
+                    field: "fechaentcont"
                 },
                 {
                     label: "Fecha Ultima Actualizacion",
