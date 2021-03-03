@@ -97,7 +97,10 @@ class RegistroCLARTSController extends Controller
         try {
             $get_all = registroCLARTS::select("registroCLARTS.id","registroCLARTS.idART","proveedores.rutProveedor",
             "proveedores.descripcionProveedor","registroCLARTS.monto","registroCLARTS.nfactura","registroCLARTS.fechaemifac",
-            DB::raw("IFNULL(registroCLARTS.fechaentcont,'Pendiente') as fechaentcont"), DB::raw("DATE_FORMAT(registroCLARTS.updated_at,'%Y-%m-%d') as updated_at"),"estados.descripcionEstado")
+            DB::raw("(CASE WHEN registroclarts.fechaentcont IS NULL THEN 'PENDIENTE'
+            WHEN registroclarts.idEstado < '4' THEN 'PENDIENTE'
+             
+             ELSE registroclarts.fechaentcont END) AS fechaentcont"), DB::raw("DATE_FORMAT(registroCLARTS.updated_at,'%Y-%m-%d') as updated_at"),"estados.descripcionEstado")
             ->join("proveedores","registroCLARTS.idProveedor","=","proveedores.id")
             ->join("estados","registroCLARTS.idEstado","=","estados.id")
             ->get();
