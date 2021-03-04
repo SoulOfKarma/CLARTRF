@@ -102,9 +102,6 @@ class RegistroCLARTSController extends Controller
         }
     }
 
-
-
-
     public function showRegistroEspecifico(){
         try {
             $get_all = registroCLARTS::select("registroCLARTS.id","registroCLARTS.idART","proveedores.rutProveedor",
