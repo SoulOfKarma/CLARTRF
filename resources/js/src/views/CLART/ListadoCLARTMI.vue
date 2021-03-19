@@ -798,7 +798,51 @@ export default {
             }
         },
         //Fin Proveedor
-        popDeleteART(id) {},
+        popDeleteART(id) {
+            try {
+                let objeto = {
+                    id: id
+                };
+                axios
+                    .post(
+                        this.localVal + "/api/CLART/DestroyRegistroCLART",
+                        objeto,
+                        {
+                            headers: {
+                                Authorization:
+                                    `Bearer ` + sessionStorage.getItem("token")
+                            }
+                        }
+                    )
+                    .then(res => {
+                        let respuesta = res.data;
+                        if (respuesta == true) {
+                            this.$vs.notify({
+                                title: "Realizado ",
+                                text:
+                                    "Registro Eliminado Correctamente, Se recargara Listado ",
+                                color: "success",
+                                position: "top-right"
+                            });
+                            this.cargarCLART();
+                        } else {
+                            this.$vs.notify({
+                                title: "Error ",
+                                text: "No fue posible eliminar el registro ",
+                                color: "danger",
+                                position: "top-right"
+                            });
+                        }
+                    });
+            } catch (error) {
+                this.$vs.notify({
+                    title: "Error ",
+                    text: "Hubo un problema al tratar de eliminar el registro ",
+                    color: "danger",
+                    position: "top-right"
+                });
+            }
+        },
         verDoc(doc) {
             const url = this.urlDocumentos + doc;
             console.log(url);

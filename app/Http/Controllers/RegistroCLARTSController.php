@@ -237,9 +237,17 @@ class RegistroCLARTSController extends Controller
      *
      * @param  \App\RegistroCLARTS  $registroCLARTS
      * @return \Illuminate\Http\Response
-     */
-    public function destroy(RegistroCLARTS $registroCLARTS)
+     *///RegistroCLARTS $registroCLARTS
+    public function destroy(Request $request)
     {
-        //
+        try {
+            $res=RegistroCLARTS::where('id',$request->id)->delete();
+            if($res){
+              return true;
+            }
+        } catch (\Throwable $th) {
+            log::info($th);
+            return false;
+        }
     }
 }
