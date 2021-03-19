@@ -354,7 +354,7 @@ export default {
             idART: "",
             monto: 0,
             montof: 0,
-            nfactura: 0,
+            nfactura: "",
             listadoProveedores: [],
             listadoEstados: [],
             localVal: process.env.MIX_APP_URL,
@@ -362,7 +362,8 @@ export default {
             verFechaEntregaCont: false,
             rutProveedorN: "",
             descripcionProveedorN: "",
-            popProveedor: false
+            popProveedor: false,
+            val_run: false
         };
     },
     methods: {

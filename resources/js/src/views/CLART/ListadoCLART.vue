@@ -46,7 +46,7 @@
                             <trash-2-icon
                                 size="1.5x"
                                 class="custom-class"
-                                @click="popDeleteART(props.row.id)"
+                                @click="popBorrarRegistro(props.row.id)"
                             ></trash-2-icon>
                         </span>
 
@@ -415,6 +415,37 @@
                 </div>
             </div>
         </vs-popup>
+        <vs-popup
+            classContent="popBorrarR"
+            title="Realmente Requiere Eliminar Este ART?"
+            :active.sync="popBorrarR"
+        >
+            <div class="vx-col w-full mb-base">
+                <div class="vx-row mb-4">
+                    <vx-card title="">
+                        <div class="vx-row mb-4">
+                            <div class="vx-col w-1/2 mt-5">
+                                <vs-button
+                                    class="w-full"
+                                    color="primary"
+                                    @click="popBorrarR = false"
+                                    >Volver</vs-button
+                                >
+                            </div>
+                            <br />
+                            <div class="vx-col w-1/2 mt-5">
+                                <vs-button
+                                    class="w-full"
+                                    color="warning"
+                                    @click="popDeleteART(idARTEliminar)"
+                                    >Eliminar Registro</vs-button
+                                >
+                            </div>
+                        </div>
+                    </vx-card>
+                </div>
+            </div>
+        </vs-popup>
     </vs-row>
 </template>
 <script>
@@ -705,7 +736,9 @@ export default {
             rutProveedorN: "",
             descripcionProveedorN: "",
             popProveedor: false,
-            val_run: false
+            val_run: false,
+            popBorrarR: false,
+            idARTEliminar: ""
         };
     },
     methods: {
@@ -867,6 +900,10 @@ export default {
                 console.log(error);
             }
         },
+        popBorrarRegistro(id) {
+            this.popBorrarR = true;
+            this.idARTEliminar = id;
+        },
         popDeleteART(id) {
             try {
                 let objeto = {
@@ -893,6 +930,7 @@ export default {
                                 color: "success",
                                 position: "top-right"
                             });
+                            this.popBorrarR = false;
                             this.cargarCLART();
                         } else {
                             this.$vs.notify({
