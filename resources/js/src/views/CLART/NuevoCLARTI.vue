@@ -138,7 +138,13 @@
                             <vs-input
                                 class="inputx w-full"
                                 v-model="rutProveedorN"
+                                v-on:blur="formatear_run"
                             ></vs-input>
+                            <span
+                                style="font-size: 10px; color: red; margin-left: 10px"
+                                v-if="val_run"
+                                >Rut Proveedor Incorrecto</span
+                            >
                         </div>
                         <br />
                         <div class="vx-col w-full ">
@@ -146,7 +152,7 @@
                             <br />
                             <vs-input
                                 class="inputx w-full"
-                                v-model="DescripcionProveedorN"
+                                v-model="descripcionProveedorN"
                             ></vs-input>
                         </div>
                     </vx-card>
@@ -196,6 +202,7 @@ import VxCard from "../../components/vx-card/VxCard.vue";
 import Datepicker from "vuejs-datepicker";
 import flatPickr from "vue-flatpickr-component";
 import "flatpickr/dist/flatpickr.css";
+import { validate, clean, format } from "rut.js";
 import moment from "moment";
 export default {
     components: {
@@ -354,11 +361,21 @@ export default {
             desDoc: "",
             verFechaEntregaCont: false,
             rutProveedorN: "",
-            DescripcionProveedorN: "",
+            descripcionProveedorN: "",
             popProveedor: false
         };
     },
     methods: {
+        //Metodos Reutilizables
+        formatear_run() {
+            if (this.rutProveedorN == "" || this.rutProveedorN == null) {
+                console.log("Sin Rut");
+                this.val_run = false;
+            } else {
+                this.rutProveedorN = format(this.rutProveedorN);
+                this.val_run = !validate(this.rutProveedorN);
+            }
+        },
         //Proveedor
         popAbrirProveedor() {
             try {
@@ -376,10 +393,10 @@ export default {
         guardarNuevoProveedor() {
             try {
                 if (
-                    this.rutProveedor == "" ||
-                    this.rutProveedor == null ||
-                    this.descripcionProveedor == "" ||
-                    this.descripcionProveedor == null
+                    this.rutProveedorN == "" ||
+                    this.rutProveedorN == null ||
+                    this.descripcionProveedorN == "" ||
+                    this.descripcionProveedorN == null
                 ) {
                     this.$vs.notify({
                         title: "Error ",
@@ -391,7 +408,7 @@ export default {
                 } else {
                     let objeto = {
                         rutProveedor: this.rutProveedorN,
-                        descripcionProveedor: this.DescripcionProveedorN
+                        descripcionProveedor: this.descripcionProveedorN
                     };
                     axios
                         .post(
@@ -422,7 +439,7 @@ export default {
                                 this.seleccionProveedor.descripcionProveedor =
                                     "";
                                 this.rutProveedorN = "";
-                                this.DescripcionProveedorN = "";
+                                this.descripcionProveedorN = "";
                             } else {
                                 this.$vs.notify({
                                     title: "Error ",

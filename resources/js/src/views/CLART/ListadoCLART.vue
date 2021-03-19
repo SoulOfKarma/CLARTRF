@@ -43,6 +43,11 @@
                                 class="custom-class"
                                 @click="popModART(props.row.id)"
                             ></upload-cloud-icon>
+                            <trash-2-icon
+                                size="1.5x"
+                                class="custom-class"
+                                @click="popDeleteART(props.row.id)"
+                            ></trash-2-icon>
                         </span>
 
                         <!-- Column: Common -->
@@ -239,6 +244,7 @@
                                             label="rutProveedor"
                                             v-model="seleccionProveedor"
                                             :options="listadoProveedores"
+                                            @input="popAbrirProveedor"
                                         ></v-select>
                                     </div>
                                     <div class="vx-col w-1/2 mt-5">
@@ -352,6 +358,63 @@
                 </div>
             </vs-popup>
         </div>
+        <vs-popup
+            classContent="popProveedor"
+            title="Agregar Nuevo Proveedor"
+            :active.sync="popProveedor"
+        >
+            <div class="vx-col w-full mb-base">
+                <div class="vx-row mb-4">
+                    <vx-card>
+                        <div class="vx-col w-full ">
+                            <h6>Rut Proveedor:</h6>
+                            <br />
+                            <vs-input
+                                class="inputx w-full"
+                                v-model="rutProveedorN"
+                                v-on:blur="formatear_run"
+                            ></vs-input>
+                            <span
+                                style="font-size: 10px; color: red; margin-left: 10px"
+                                v-if="val_run"
+                                >Rut Proveedor Incorrecto</span
+                            >
+                        </div>
+                        <br />
+                        <div class="vx-col w-full ">
+                            <h6>Descripcion Proveedor:</h6>
+                            <br />
+                            <vs-input
+                                class="inputx w-full"
+                                v-model="descripcionProveedorN"
+                            ></vs-input>
+                        </div>
+                    </vx-card>
+                    <br />
+                    <vx-card title="">
+                        <div class="vx-row mb-4">
+                            <div class="vx-col w-1/2 mt-5">
+                                <vs-button
+                                    class="w-full"
+                                    color="primary"
+                                    @click="popProveedor = false"
+                                    >Volver</vs-button
+                                >
+                            </div>
+                            <br />
+                            <div class="vx-col w-1/2 mt-5">
+                                <vs-button
+                                    class="w-full"
+                                    color="warning"
+                                    @click="guardarNuevoProveedor()"
+                                    >Guardar Proveedor</vs-button
+                                >
+                            </div>
+                        </div>
+                    </vx-card>
+                </div>
+            </div>
+        </vs-popup>
     </vs-row>
 </template>
 <script>
@@ -377,6 +440,7 @@ import flatPickr from "vue-flatpickr-component";
 import "flatpickr/dist/flatpickr.css";
 import moment from "moment";
 import VueGoodTablePlugin from "vue-good-table";
+import { validate, clean, format } from "rut.js";
 
 // import the styles
 import "vue-good-table/dist/vue-good-table.css";
@@ -637,10 +701,105 @@ export default {
             listadoEstados: [],
             listadoModClart: [],
             desDoc: "",
-            idMod: 0
+            idMod: 0,
+            rutProveedorN: "",
+            descripcionProveedorN: "",
+            popProveedor: false,
+            val_run: false
         };
     },
     methods: {
+        //Metodos Reutilizables
+        formatear_run() {
+            if (this.rutProveedorN == "" || this.rutProveedorN == null) {
+                console.log("Sin Rut");
+                this.val_run = false;
+            } else {
+                this.rutProveedorN = format(this.rutProveedorN);
+                this.val_run = !validate(this.rutProveedorN);
+            }
+        },
+        //Proveedor
+        popAbrirProveedor() {
+            try {
+                if (
+                    this.seleccionProveedor.id == 0 ||
+                    this.seleccionProveedor.id == null
+                ) {
+                    this.popUpdate = false;
+                    this.popProveedor = true;
+                    this.rutProveedorN = this.seleccionProveedor.rutProveedor;
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        },
+        guardarNuevoProveedor() {
+            try {
+                if (
+                    this.rutProveedorN == "" ||
+                    this.rutProveedorN == null ||
+                    this.descripcionProveedorN == "" ||
+                    this.descripcionProveedorN == null
+                ) {
+                    this.$vs.notify({
+                        title: "Error ",
+                        text:
+                            "Rut o Descripcion Proveedor no Ingresados, verifique y intente nuevamente ",
+                        color: "success",
+                        position: "top-right"
+                    });
+                } else {
+                    let objeto = {
+                        rutProveedor: this.rutProveedorN,
+                        descripcionProveedor: this.descripcionProveedorN
+                    };
+                    axios
+                        .post(
+                            this.localVal + "/api/CLART/PostProveedor",
+                            objeto,
+                            {
+                                headers: {
+                                    Authorization:
+                                        `Bearer ` +
+                                        sessionStorage.getItem("token")
+                                }
+                            }
+                        )
+                        .then(res => {
+                            let resp1 = res.data;
+                            if (resp1 == true) {
+                                this.$vs.notify({
+                                    title: "Proveedor Guardado ",
+                                    text:
+                                        "Se recargara listado de proveedores ",
+                                    color: "success",
+                                    position: "top-right"
+                                });
+                                this.popProveedor = false;
+                                this.cargarProveedores();
+                                this.seleccionProveedor.id = 0;
+                                this.seleccionProveedor.rutProveedor = "";
+                                this.seleccionProveedor.descripcionProveedor =
+                                    "";
+                                this.rutProveedorN = "";
+                                this.descripcionProveedorN = "";
+                            } else {
+                                this.$vs.notify({
+                                    title: "Error ",
+                                    text:
+                                        "No fue posible registrar el proveedor, intente nuevamente ",
+                                    color: "danger",
+                                    position: "top-right"
+                                });
+                            }
+                        });
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        },
+        //Fin Proveedor
         verDoc(doc) {
             const url = this.urlDocumentos + doc;
             console.log(url);
@@ -708,6 +867,7 @@ export default {
                 console.log(error);
             }
         },
+        popDeleteART(id) {},
         getImage(event) {
             //Asignamos la imagen a  nuestra data
             this.image = event.target.files[0];
