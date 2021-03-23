@@ -122,4 +122,16 @@ class RepositorioDocumentacionesController extends Controller
     {
         //
     }
+
+    public function DestroyDocRegCLART(Request $request){
+        try {
+            $res=RepositorioDocumentaciones::where('id',$request->id)->delete();
+            if($res){
+              return true;
+            }
+        } catch (\Throwable $th) {
+            log::info($th);
+            return false;
+        }
+    }
 }

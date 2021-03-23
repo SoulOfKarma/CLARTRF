@@ -250,4 +250,6 @@ class RegistroCLARTSController extends Controller
             return false;
         }
     }
+
+    
 }

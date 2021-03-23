@@ -152,6 +152,15 @@
                                                     )
                                                 "
                                             ></plus-circle-icon>
+                                            <trash-2-icon
+                                                size="1.5x"
+                                                class="custom-class"
+                                                @click="
+                                                    popConfirmacionEliminacionDocumento(
+                                                        props.row.id
+                                                    )
+                                                "
+                                            ></trash-2-icon>
                                         </span>
 
                                         <!-- Column: Common -->
@@ -439,6 +448,40 @@
                                     color="warning"
                                     @click="popDeleteART(idARTEliminar)"
                                     >Eliminar Registro</vs-button
+                                >
+                            </div>
+                        </div>
+                    </vx-card>
+                </div>
+            </div>
+        </vs-popup>
+        <vs-popup
+            classContent="popDeleteDoc"
+            title="Realmente desea eliminar este documento?"
+            :active.sync="popDeleteDoc"
+        >
+            <div class="vx-col w-full mb-base">
+                <div class="vx-row mb-4">
+                    <vx-card title="">
+                        <div class="vx-row mb-4">
+                            <div class="vx-col w-1/2 mt-5">
+                                <vs-button
+                                    class="w-full"
+                                    color="primary"
+                                    @click="
+                                        (popDeleteDoc = false),
+                                            (popVerDoc = true)
+                                    "
+                                    >Volver</vs-button
+                                >
+                            </div>
+                            <br />
+                            <div class="vx-col w-1/2 mt-5">
+                                <vs-button
+                                    class="w-full"
+                                    color="warning"
+                                    @click="deleteDocumento()"
+                                    >Eliminar Documento</vs-button
                                 >
                             </div>
                         </div>
@@ -736,7 +779,9 @@ export default {
             popProveedor: false,
             val_run: false,
             popBorrarR: false,
-            idARTEliminar: ""
+            popDeleteDoc: false,
+            idARTEliminar: "",
+            idDelDoc: 0
         };
     },
     methods: {
@@ -1294,8 +1339,59 @@ export default {
             } catch (error) {
                 console.log(error);
             }
-        }
+        },
         //Fin carga Listados
+        //Eliminar Documentos Listados
+        popConfirmacionEliminacionDocumento(id) {
+            this.popDeleteDoc = true;
+            this.popVerDoc = false;
+            this.idDelDoc = id;
+        },
+        deleteDocumento() {
+            try {
+                let objeto = {
+                    id: this.idDelDoc
+                };
+                axios
+                    .post(
+                        this.localVal + "/api/CLART/DestroyDocRegCLART",
+                        objeto,
+                        {
+                            headers: {
+                                Authorization:
+                                    `Bearer ` + sessionStorage.getItem("token")
+                            }
+                        }
+                    )
+                    .then(res => {
+                        let respuesta = res.data;
+                        if (respuesta == true) {
+                            this.$vs.notify({
+                                title: "Realizado ",
+                                text: "Documento Eliminado Correctamente ",
+                                color: "success",
+                                position: "top-right"
+                            });
+                            this.popDeleteDoc = false;
+                        } else {
+                            this.$vs.notify({
+                                title: "Error ",
+                                text: "No fue posible eliminar el documento ",
+                                color: "danger",
+                                position: "top-right"
+                            });
+                        }
+                    });
+            } catch (error) {
+                this.$vs.notify({
+                    title: "Error ",
+                    text:
+                        "Hubo un problema al tratar de eliminar el documento ",
+                    color: "danger",
+                    position: "top-right"
+                });
+            }
+        }
     },
     created: function() {
         this.cargarCLART();

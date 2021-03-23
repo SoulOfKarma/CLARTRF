@@ -108,12 +108,20 @@
             <br />
             <vx-card title="">
                 <div class="vx-row mb-4">
-                    <div class="vx-col w-1/2 mt-5">
+                    <div class="vx-col w-1/3 mt-5">
                         <vs-button class="fixedHeight w-full" color="primary"
                             >Volver</vs-button
                         >
                     </div>
-                    <div class="vx-col w-1/2 mt-5">
+                    <div class="vx-col w-1/3 mt-5">
+                        <vs-button
+                            class="w-full"
+                            color="warning"
+                            @click="limpiar()"
+                            >Limpiar Campos</vs-button
+                        >
+                    </div>
+                    <div class="vx-col w-1/3 mt-5">
                         <vs-button
                             class="fixedHeight w-full"
                             color="success"
@@ -377,6 +385,23 @@ export default {
                 this.val_run = !validate(this.rutProveedorN);
             }
         },
+        limpiar() {
+            this.seleccionProveedor = {
+                id: 0,
+                rutProveedor: "",
+                descripcionProveedor: ""
+            };
+            this.seleccionEstados = {
+                id: 1,
+                descripcionEstado: "Ingresado"
+            };
+            this.monto = 0;
+            this.montof = 0;
+            this.nfactura = "";
+            this.image = "";
+            this.idART = "";
+            this.fechaFactura = moment().format("YYYY-MM-DD");
+        },
         //Proveedor
         popAbrirProveedor() {
             try {
@@ -488,7 +513,6 @@ export default {
                 return true;
             }
         },
-        limpiar() {},
         onFromChange(selectedDates, dateStr, instance) {
             this.$set(this.configTodateTimePicker, dateStr);
         },
@@ -576,7 +600,7 @@ export default {
                                 nfactura: this.nfactura,
                                 fechaemifac: this.fechaFactura,
                                 fechaentcont: this.fechaEmisionContabilidad,
-                                idCategoria: 4,
+                                idCategoria: 3,
                                 idEstado: this.seleccionEstados.id
                             };
 
@@ -611,6 +635,7 @@ export default {
                                                 color: "success",
                                                 position: "top-right"
                                             });
+                                            this.limpiar();
                                             this.popupActive3 = false;
                                         } else {
                                             this.$vs.notify({
@@ -631,7 +656,7 @@ export default {
                                 monto: this.montof,
                                 nfactura: this.nfactura,
                                 fechaemifac: this.fechaFactura,
-                                idCategoria: 4,
+                                idCategoria: 3,
                                 idEstado: this.seleccionEstados.id
                             };
 
@@ -666,6 +691,7 @@ export default {
                                                 color: "success",
                                                 position: "top-right"
                                             });
+                                            this.limpiar();
                                             this.popupActive3 = false;
                                         } else {
                                             this.$vs.notify({
@@ -696,7 +722,7 @@ export default {
                                 nfactura: this.nfactura,
                                 fechaemifac: this.fechaFactura,
                                 fechaentcont: this.fechaEmisionContabilidad,
-                                idCategoria: 4,
+                                idCategoria: 3,
                                 idEstado: this.seleccionEstados.id
                             };
 
@@ -746,6 +772,7 @@ export default {
                                                 color: "success",
                                                 position: "top-right"
                                             });
+                                            this.limpiar();
                                             this.popupActive3 = false;
                                         } else {
                                             this.$vs.notify({
@@ -773,7 +800,7 @@ export default {
                                 monto: this.montof,
                                 nfactura: this.nfactura,
                                 fechaemifac: this.fechaFactura,
-                                idCategoria: 4,
+                                idCategoria: 3,
                                 idEstado: this.seleccionEstados.id
                             };
 
@@ -823,6 +850,7 @@ export default {
                                                 color: "success",
                                                 position: "top-right"
                                             });
+                                            this.limpiar();
                                             this.popupActive3 = false;
                                         } else {
                                             this.$vs.notify({
