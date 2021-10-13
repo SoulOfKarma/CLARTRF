@@ -49,10 +49,10 @@ class RegistroCLARTSController extends Controller
         try {
             $get_all = registroCLARTS::select("registroCLARTS.id","registroCLARTS.idART","proveedores.rutProveedor",
             "proveedores.descripcionProveedor","registroCLARTS.monto","registroCLARTS.nfactura","registroCLARTS.fechaemifac",
-            DB::raw("(CASE WHEN registroclarts.fechaentcont IS NULL THEN 'PENDIENTE'
-            WHEN registroclarts.idEstado < '4' THEN 'PENDIENTE'
+            DB::raw("(CASE WHEN registroCLARTS.fechaentcont IS NULL THEN 'PENDIENTE'
+            WHEN registroCLARTS.idEstado < '4' THEN 'PENDIENTE'
              
-             ELSE registroclarts.fechaentcont END) AS fechaentcont"),DB::raw("DATE_FORMAT(registroCLARTS.updated_at,'%Y-%m-%d') as updated_at"),"estados.descripcionEstado")
+             ELSE registroCLARTS.fechaentcont END) AS fechaentcont"),DB::raw("DATE_FORMAT(registroCLARTS.updated_at,'%Y-%m-%d') as updated_at"),"estados.descripcionEstado")
             ->join("proveedores","registroCLARTS.idProveedor","=","proveedores.id")
             ->join("estados","registroCLARTS.idEstado","=","estados.id")
             ->where("registroCLARTS.idCategoria",2)
@@ -68,10 +68,10 @@ class RegistroCLARTSController extends Controller
         try {
             $get_all = registroCLARTS::select("registroCLARTS.id","registroCLARTS.idART","proveedores.rutProveedor",
             "proveedores.descripcionProveedor","registroCLARTS.monto","registroCLARTS.nfactura","registroCLARTS.fechaemifac",
-            DB::raw("(CASE WHEN registroclarts.fechaentcont IS NULL THEN 'PENDIENTE'
-            WHEN registroclarts.idEstado < '4' THEN 'PENDIENTE'
+            DB::raw("(CASE WHEN registroCLARTS.fechaentcont IS NULL THEN 'PENDIENTE'
+            WHEN registroCLARTS.idEstado < '4' THEN 'PENDIENTE'
              
-             ELSE registroclarts.fechaentcont END) AS fechaentcont"),DB::raw("DATE_FORMAT(registroCLARTS.updated_at,'%Y-%m-%d') as updated_at"),"estados.descripcionEstado")
+             ELSE registroCLARTS.fechaentcont END) AS fechaentcont"),DB::raw("DATE_FORMAT(registroCLARTS.updated_at,'%Y-%m-%d') as updated_at"),"estados.descripcionEstado")
             ->join("proveedores","registroCLARTS.idProveedor","=","proveedores.id")
             ->join("estados","registroCLARTS.idEstado","=","estados.id")
             ->where("registroCLARTS.idCategoria",3)
@@ -87,10 +87,10 @@ class RegistroCLARTSController extends Controller
         try {
             $get_all = registroCLARTS::select("registroCLARTS.id","registroCLARTS.idART","proveedores.rutProveedor",
             "proveedores.descripcionProveedor","registroCLARTS.monto","registroCLARTS.nfactura","registroCLARTS.fechaemifac",
-            DB::raw("(CASE WHEN registroclarts.fechaentcont IS NULL THEN 'PENDIENTE'
-            WHEN registroclarts.idEstado < '4' THEN 'PENDIENTE'
+            DB::raw("(CASE WHEN registroCLARTS.fechaentcont IS NULL THEN 'PENDIENTE'
+            WHEN registroCLARTS.idEstado < '4' THEN 'PENDIENTE'
              
-             ELSE registroclarts.fechaentcont END) AS fechaentcont"),DB::raw("DATE_FORMAT(registroCLARTS.updated_at,'%Y-%m-%d') as updated_at"),"estados.descripcionEstado")
+             ELSE registroCLARTS.fechaentcont END) AS fechaentcont"),DB::raw("DATE_FORMAT(registroCLARTS.updated_at,'%Y-%m-%d') as updated_at"),"estados.descripcionEstado")
             ->join("proveedores","registroCLARTS.idProveedor","=","proveedores.id")
             ->join("estados","registroCLARTS.idEstado","=","estados.id")
             ->where("registroCLARTS.idCategoria",4)
@@ -106,10 +106,10 @@ class RegistroCLARTSController extends Controller
         try {
             $get_all = registroCLARTS::select("registroCLARTS.id","registroCLARTS.idART","proveedores.rutProveedor",
             "proveedores.descripcionProveedor","registroCLARTS.monto","registroCLARTS.nfactura","registroCLARTS.fechaemifac",
-            DB::raw("(CASE WHEN registroclarts.fechaentcont IS NULL THEN 'PENDIENTE'
-            WHEN registroclarts.idEstado < '4' THEN 'PENDIENTE'
+            DB::raw("(CASE WHEN registroCLARTS.fechaentcont IS NULL THEN 'PENDIENTE'
+            WHEN registroCLARTS.idEstado < '4' THEN 'PENDIENTE'
              
-             ELSE registroclarts.fechaentcont END) AS fechaentcont"), DB::raw("DATE_FORMAT(registroCLARTS.updated_at,'%Y-%m-%d') as updated_at"),"estados.descripcionEstado")
+             ELSE registroCLARTS.fechaentcont END) AS fechaentcont"), DB::raw("DATE_FORMAT(registroCLARTS.updated_at,'%Y-%m-%d') as updated_at"),"estados.descripcionEstado")
             ->join("proveedores","registroCLARTS.idProveedor","=","proveedores.id")
             ->join("estados","registroCLARTS.idEstado","=","estados.id")
             ->get();
